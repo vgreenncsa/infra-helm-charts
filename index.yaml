@@ -34,6 +34,16 @@ entries:
   argo-rollouts:
   - apiVersion: v2
     appVersion: 1.31.1
+    created: "2022-11-21T17:59:47.614923292Z"
+    description: Kubernetes Progressive Delivery Controller
+    digest: 56ee68d1ea0cb295747ebb967e275cba11dfa15c52246d5219b2dd8d632bc823
+    name: argo-rollouts
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-rollouts-0.1.2/argo-rollouts-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.31.1
     created: "2022-11-21T17:23:29.862717063Z"
     description: Kubernetes Progressive Delivery Controller
     digest: b3459f6fc40ba0effcb299460c479fd9e7c6b9c48b9f079c809af9ba8f6e40ce
