@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  argo-cd:
+  - apiVersion: v2
+    appVersion: 2.5.2
+    created: "2022-11-21T15:00:13.047851418Z"
+    description: A Helm chart for Kubernetes
+    digest: 48a0946f54571f737d7fb94e044cc16fcfc82e1fce9d3c5559b7d11cbb1a478a
+    name: argo-cd
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-cd-0.1.0/argo-cd-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-11-21T15:00:12.899606107Z"
