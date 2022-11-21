@@ -31,4 +31,15 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-cd-0.1.0/argo-cd-0.1.0.tgz
     version: 0.1.0
+  argo-rollouts:
+  - apiVersion: v2
+    appVersion: 1.31.1
+    created: "2022-11-21T17:14:18.748831742Z"
+    description: Kubernetes Progressive Delivery Controller
+    digest: dd624442ef1f089f331e990e7b42c7fab89908087fc65d9ae97e00915984bedd
+    name: argo-rollouts
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-rollouts-0.1.0/argo-rollouts-0.1.0.tgz
+    version: 0.1.0
 generated: "2022-11-21T15:00:12.899606107Z"
