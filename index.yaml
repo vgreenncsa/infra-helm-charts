@@ -3,6 +3,16 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.5.2
+    created: "2022-11-21T15:35:15.699312644Z"
+    description: A declarative GitOps continuous delivery tool for Kubernetes.
+    digest: b8bb33879e2eef57d6eddf57c737bc24856e27948493a9acaf0a71e74e3a4825
+    name: argo-cd
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-cd-0.1.2/argo-cd-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 2.5.2
     created: "2022-11-21T15:26:27.64963047Z"
     description: A declarative GitOps continuous delivery tool for Kubernetes.
     digest: 47552933eb87816314692ee4df9b687a10b1bb8f6ccf22acb886ef030c623e17
