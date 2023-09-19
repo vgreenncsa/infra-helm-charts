@@ -61,6 +61,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-cd-0.1.0/argo-cd-0.1.0.tgz
     version: 0.1.0
+  argo-events:
+  - apiVersion: v2
+    appVersion: 1.8.1
+    created: "2023-09-19T06:53:42.568424064Z"
+    description: The Event-Based Dependency Manager for Kubernetes
+    digest: 4a8e14bf0065c4d8192ec74640b384722c96c77af2077bab542eedde31e20962
+    name: argo-events
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-events-0.1.0/argo-events-0.1.0.tgz
+    version: 0.1.0
   argo-rollouts:
   - apiVersion: v2
     appVersion: 1.31.1
