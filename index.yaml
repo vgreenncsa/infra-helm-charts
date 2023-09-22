@@ -116,6 +116,16 @@ entries:
   argo-workflows:
   - apiVersion: v2
     appVersion: 3.4.11
+    created: "2023-09-22T17:09:02.33698747Z"
+    description: The workflow engine for Kubernetes
+    digest: e97972f9ea59c5c4978dff445faa8c57231eb0cc243dda09e6dcea6f956d5acd
+    name: argo-workflows
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-workflows-0.3.0/argo-workflows-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 3.4.11
     created: "2023-09-22T15:41:00.412599517Z"
     description: The workflow engine for Kubernetes
     digest: b5378128adc00863568f6255a6e921486567ba05533c7d9f759951cf5bce21c3
