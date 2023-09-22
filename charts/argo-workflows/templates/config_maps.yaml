@@ -11,5 +11,6 @@ metadata:
     app.kubernetes.io/name: argo-cmd-params-cm
     app.kubernetes.io/part-of: argo
   name: argo-cmd-params-cm
+  namespace: argo
 data:
   server.secure: "false"
