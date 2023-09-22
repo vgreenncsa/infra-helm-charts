@@ -5,8 +5,8 @@ metadata:
   namespace: argo
 spec:
   ports:
-  - name: web
-    port: 2746
+  - name: http
+    port: 80
     targetPort: 2746
   selector:
     app: argo-server
