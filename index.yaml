@@ -144,4 +144,28 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-workflows-0.1.0/argo-workflows-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-21T15:00:12.899606107Z"
+  nvidia-device-plugin:
+  - apiVersion: v2
+    appVersion: 0.14.1
+    created: "2023-10-04T14:19:25.110612672Z"
+    dependencies:
+    - alias: nfd
+      condition: nfd.enabled,gfd.enabled
+      name: node-feature-discovery
+      repository: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+      version: 0.13.0
+    - alias: gfd
+      condition: gfd.enabled
+      name: gpu-feature-discovery
+      repository: ""
+      version: 0.8.1
+    description: A Helm chart for the nvidia-device-plugin on Kubernetes
+    digest: ccebdfd0d78f8437043ba6c67941473889b9c59b7691b01fe987d3c2dc8a5c94
+    home: https://github.com/NVIDIA/k8s-device-plugin
+    kubeVersion: '>= 1.10.0-0'
+    name: nvidia-device-plugin
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/nvidia-device-plugin-0.14.1/nvidia-device-plugin-0.14.1.tgz
+    version: 0.14.1
+generated: "2023-10-04T14:19:25.110637372Z"
