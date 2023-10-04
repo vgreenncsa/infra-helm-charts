@@ -1,9 +1,0 @@
-dependencies:
-- name: node-feature-discovery
-  repository: https://kubernetes-sigs.github.io/node-feature-discovery/charts
-  version: 0.13.0
-- name: gpu-feature-discovery
-  repository: ""
-  version: 0.8.1
-digest: sha256:b97936b404f08db493c74b75054446913081637b1d12f65be517beb550018485
-generated: "2023-07-11T16:54:18.815451+02:00"
