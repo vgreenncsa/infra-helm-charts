@@ -144,6 +144,27 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-workflows-0.1.0/argo-workflows-0.1.0.tgz
     version: 0.1.0
+  aws-ebs-csi-driver:
+  - apiVersion: v2
+    appVersion: 1.23.1
+    created: "2023-10-06T18:10:34.002568815Z"
+    description: A Helm chart for AWS EBS CSI Driver
+    digest: eba74e2f003cf9915216546645af6a1af27b96befb08e40790e28cdb0ff756df
+    home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
+    keywords:
+    - aws
+    - ebs
+    - csi
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - name: Kubernetes Authors
+      url: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/
+    name: aws-ebs-csi-driver
+    sources:
+    - https://github.com/kubernetes-sigs/aws-ebs-csi-driver
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/aws-ebs-csi-driver-2.23.1/aws-ebs-csi-driver-2.23.1.tgz
+    version: 2.23.1
   nvidia-device-plugin:
   - apiVersion: v2
     appVersion: 0.14.1
@@ -168,4 +189,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/nvidia-device-plugin-0.14.1/nvidia-device-plugin-0.14.1.tgz
     version: 0.14.1
-generated: "2023-10-04T14:19:25.110637372Z"
+generated: "2023-10-06T18:10:34.002591215Z"
