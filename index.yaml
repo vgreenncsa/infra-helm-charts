@@ -165,6 +165,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/aws-ebs-csi-driver-2.23.1/aws-ebs-csi-driver-2.23.1.tgz
     version: 2.23.1
+  karpenter:
+  - apiVersion: v2
+    appVersion: 0.31.0
+    created: "2023-10-07T10:19:20.862768373Z"
+    description: A Helm chart for deploying Karpenter to Kubernetes
+    digest: 08071141a3d7ac3a7d291c71142f6eb4819393e1afc7bea036bba8cb2c6f3156
+    name: karpenter
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/karpenter-0.31.0/karpenter-0.31.0.tgz
+    version: 0.31.0
   nvidia-device-plugin:
   - apiVersion: v2
     appVersion: 0.14.1
@@ -189,4 +200,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/nvidia-device-plugin-0.14.1/nvidia-device-plugin-0.14.1.tgz
     version: 0.14.1
-generated: "2023-10-06T18:10:34.002591215Z"
+generated: "2023-10-07T10:19:20.862796174Z"
