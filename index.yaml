@@ -178,6 +178,16 @@ entries:
   cert-manager:
   - apiVersion: v2
     appVersion: 1.12.0
+    created: "2023-10-09T21:51:05.88739074Z"
+    description: A Helm chart for Cert Manager
+    digest: 24deca7982c4bfa045c6b1c7ef0c4f6410a211e7cc3a8564055360eade7522a6
+    name: cert-manager
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/cert-manager-1.13.0/cert-manager-1.13.0.tgz
+    version: 1.13.0
+  - apiVersion: v2
+    appVersion: 1.12.0
     created: "2023-10-09T19:38:16.423671208Z"
     description: A Helm chart for Cert Manager
     digest: 90610944b5d17febed20056426aaad750b9808563eec72187b555191fa57cc7a
@@ -264,4 +274,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-09T19:38:16.423712908Z"
+generated: "2023-10-09T21:51:05.887426241Z"
