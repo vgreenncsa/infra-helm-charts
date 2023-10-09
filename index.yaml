@@ -175,6 +175,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/aws-ebs-csi-driver-2.23.1/aws-ebs-csi-driver-2.23.1.tgz
     version: 2.23.1
+  cert-manager:
+  - apiVersion: v2
+    appVersion: 1.12.0
+    created: "2023-10-09T19:38:16.423671208Z"
+    description: A Helm chart for Cert Manager
+    digest: 90610944b5d17febed20056426aaad750b9808563eec72187b555191fa57cc7a
+    name: cert-manager
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/cert-manager-1.12.0/cert-manager-1.12.0.tgz
+    version: 1.12.0
   external-dns:
   - apiVersion: v2
     appVersion: 0.11.0
@@ -253,4 +264,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-09T14:40:17.787590719Z"
+generated: "2023-10-09T19:38:16.423712908Z"
