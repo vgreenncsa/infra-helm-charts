@@ -4,6 +4,12 @@
 
 replicaCount: 1
 
+image:
+  repository: k8s.gcr.io/external-dns/external-dns
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v0.11.0"
+
 domainFilter: ""
 
 provider: "aws"
