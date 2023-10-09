@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: internal-dns-viewer
+  labels:
+    app.kubernetes.io/name: internal-dns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: internal-dns
+subjects:
+  - kind: ServiceAccount
+    name: internal-dns
+    namespace: kube-system # change to desired namespace: externaldns, kube-addons
