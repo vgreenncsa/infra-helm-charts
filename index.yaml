@@ -211,4 +211,15 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/nvidia-device-plugin-0.14.1/nvidia-device-plugin-0.14.1.tgz
     version: 0.14.1
-generated: "2023-10-09T12:45:04.90667838Z"
+  reference-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-10-09T13:24:47.437495033Z"
+    description: A Helm chart for Kubernetes
+    digest: 88ca3dd7a2c4086a1929e23737d0644cfcd125a46978f4bc6b312a4124353b01
+    name: reference-app
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-10-09T13:24:47.437524133Z"
