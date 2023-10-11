@@ -1,0 +1,10 @@
+apiVersion: v2
+name: opencost
+description: A Helm chart for Open Cost
+
+
+type: application
+
+version: 1.106.2
+
+appVersion: "1.106.2"
