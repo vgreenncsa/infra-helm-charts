@@ -303,6 +303,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/nvidia-device-plugin-0.14.1/nvidia-device-plugin-0.14.1.tgz
     version: 0.14.1
+  opencost:
+  - apiVersion: v2
+    appVersion: 1.106.2
+    created: "2023-10-11T02:33:43.217658206Z"
+    description: A Helm chart for Open Cost
+    digest: 1b54efbc8bf6d1b9d58cbf3a59ffbc034688d210ebcd102db8f2f5d8421c3032
+    name: opencost
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/opencost-1.106.2/opencost-1.106.2.tgz
+    version: 1.106.2
   prometheus:
   - annotations:
       artifacthub.io/license: Apache-2.0
@@ -372,4 +383,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-10T21:35:20.899411591Z"
+generated: "2023-10-11T02:33:43.217694007Z"
