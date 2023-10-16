@@ -279,6 +279,16 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/karpenter-0.31.0/karpenter-0.31.0.tgz
     version: 0.31.0
+  kuberay-apiserver:
+  - apiVersion: v2
+    created: "2023-10-16T12:16:51.078708496Z"
+    description: A Helm chart for kuberay-apiserver
+    digest: 4de19f42a432b9de383046f8426e2c5ad50ecce23b0f3d7fb9ad3a046755cd5a
+    name: kuberay-apiserver
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/kuberay-apiserver-1.0.0-rc.0/kuberay-apiserver-1.0.0-rc.0.tgz
+    version: 1.0.0-rc.0
   kuberay-operator:
   - apiVersion: v2
     created: "2023-10-16T12:03:31.00859476Z"
@@ -404,4 +414,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-16T12:11:44.67813372Z"
+generated: "2023-10-16T12:16:51.078741996Z"
