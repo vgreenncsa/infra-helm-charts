@@ -383,6 +383,16 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/prometheus-25.1.0/prometheus-25.1.0.tgz
     version: 25.1.0
+  ray-cluster:
+  - apiVersion: v1
+    created: "2023-10-16T12:11:44.67809432Z"
+    description: A Helm chart for Kubernetes
+    digest: bb653ca72a87209f54a6b8e220e8e107969e14d7521f41eeb9a4cef2ec424adc
+    icon: https://github.com/ray-project/ray/raw/master/doc/source/images/ray_header_logo.png
+    name: ray-cluster
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/ray-cluster-1.0.0-rc.0/ray-cluster-1.0.0-rc.0.tgz
+    version: 1.0.0-rc.0
   reference-app:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -394,4 +404,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-16T12:03:31.008851563Z"
+generated: "2023-10-16T12:11:44.67813372Z"
