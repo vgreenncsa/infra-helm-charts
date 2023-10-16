@@ -175,6 +175,29 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/aws-ebs-csi-driver-2.23.1/aws-ebs-csi-driver-2.23.1.tgz
     version: 2.23.1
+  aws-efs-csi-driver:
+  - apiVersion: v2
+    appVersion: 1.7.0
+    created: "2023-10-16T12:29:33.458736668Z"
+    description: A Helm chart for AWS EFS CSI Driver
+    digest: 681e2d114baca90107d18f9df6369877b52ae2145c9e46a532d1a22c1a6fa6b5
+    home: https://github.com/kubernetes-sigs/aws-efs-csi-driver
+    keywords:
+    - aws
+    - efs
+    - csi
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - name: leakingtapan
+      url: https://github.com/leakingtapan
+    - name: krmichel
+      url: https://github.com/krmichel
+    name: aws-efs-csi-driver
+    sources:
+    - https://github.com/kubernetes-sigs/aws-efs-csi-driver
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/aws-efs-csi-driver-2.5.0/aws-efs-csi-driver-2.5.0.tgz
+    version: 2.5.0
   cert-manager:
   - apiVersion: v2
     appVersion: 1.12.0
@@ -414,4 +437,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-16T12:16:51.078741996Z"
+generated: "2023-10-16T12:29:33.458776269Z"
