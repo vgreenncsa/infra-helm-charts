@@ -291,6 +291,30 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/internal-dns-0.1.1/internal-dns-0.1.1.tgz
     version: 0.1.1
+  jupyterhub:
+  - apiVersion: v2
+    appVersion: 4.0.2
+    created: "2023-10-17T07:35:07.261131188Z"
+    description: Multi-user Jupyter installation
+    digest: 7dcaf9094a6da382e67a0009f31bff9d9270b0bd9ef451fff1f5e4a8b7bdc76e
+    home: https://z2jh.jupyter.org
+    icon: https://hub.jupyter.org/helm-chart/images/hublogo.svg
+    keywords:
+    - jupyter
+    - jupyterhub
+    - z2jh
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: erik@sundellopensource.se
+      name: Erik Sundell
+    - name: Simon Li
+      url: https://github.com/manics/
+    name: jupyterhub
+    sources:
+    - https://github.com/jupyterhub/zero-to-jupyterhub-k8s
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/jupyterhub-3.1.0/jupyterhub-3.1.0.tgz
+    version: 3.1.0
   karpenter:
   - apiVersion: v2
     appVersion: 0.31.0
@@ -437,4 +461,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-16T12:29:33.458776269Z"
+generated: "2023-10-17T07:35:07.261166788Z"
