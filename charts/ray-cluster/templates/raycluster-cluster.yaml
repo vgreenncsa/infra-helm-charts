@@ -18,23 +18,16 @@ spec:
   autoscalerOptions: {{- toYaml .Values.head.autoscalerOptions | nindent 4 }}
   {{- end }}
   headGroupSpec:
-    {{- if .Values.head.headService }}
-    headService: {{- toYaml .Values.head.headService | nindent 6 }}
-    {{- end }}
     serviceType: {{ .Values.service.type }}
     rayStartParams:
-    {{- if and (not .Values.head.rayStartParams) (not .Values.head.initArgs) }}
-      {}
-    {{- else }}
-      {{- range $key, $val := .Values.head.rayStartParams }}
-        {{ $key }}: {{ $val | quote }}
-      {{- end }}
-      {{- /*
-      initArgs is a deprecated alias for rayStartParams.
-      */}}
-      {{- range $key, $val := .Values.head.initArgs }}
-        {{ $key }}: {{ $val | quote }}
-      {{- end }}
+    {{- range $key, $val := .Values.head.rayStartParams }}
+      {{ $key }}: {{ $val | quote }}
+    {{- end }}
+    {{- /*
+    initArgs is a deprecated alias for rayStartParams.
+    */}}
+    {{- range $key, $val := .Values.head.initArgs }}
+      {{ $key }}: {{ $val | quote }}
     {{- end }}
     template:
       spec:
@@ -42,19 +35,11 @@ spec:
         {{- if .Values.head.serviceAccountName }}
         serviceAccountName: {{ .Values.head.serviceAccountName }}
         {{- end }}
-        {{- if .Values.head.initContainers }}
-        initContainers: {{- toYaml .Values.head.initContainers | nindent 10 }}
-        {{- end }}
         containers:
           - volumeMounts: {{- toYaml .Values.head.volumeMounts | nindent 12 }}
             name: ray-head
-            {{- if .Values.head.image }}
-            image: {{ .Values.head.image.repository }}:{{ .Values.head.image.tag }}
-            imagePullPolicy: {{ .Values.head.image.pullPolicy }}
-            {{- else }}
             image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
             imagePullPolicy: {{ .Values.image.pullPolicy }}
-            {{- end }}
             resources: {{- toYaml .Values.head.resources | nindent 14 }}
             securityContext:
             {{- toYaml .Values.head.securityContext | nindent 14 }}
@@ -96,49 +81,43 @@ spec:
   {{- range $groupName, $values := .Values.additionalWorkerGroups }}
   {{- if ne $values.disabled true }}
   - rayStartParams:
-    {{- if and (not $values.rayStartParams) (not $values.initArgs) }}
-      {}
-    {{- else }}
-      {{- range $key, $val := $values.rayStartParams }}
-        {{ $key }}: {{ $val | quote }}
-      {{- end }}
-      {{- /*
-      initArgs is a deprecated alias for rayStartParams.
-      */}}
-      {{- range $key, $val := $values.initArgs }}
-        {{ $key }}: {{ $val | quote }}
-      {{- end }}
+    {{- range $key, $val := $values.rayStartParams }}
+      {{ $key }}: {{ $val | quote }}
+    {{- end }}
+    {{- /*
+    initArgs is a deprecated alias for rayStartParams.
+    */}}
+    {{- range $key, $val := $values.initArgs }}
+      {{ $key }}: {{ $val | quote }}
     {{- end }}
     replicas: {{ $values.replicas }}
-    minReplicas: {{ $values.minReplicas | default (default 0 $values.miniReplicas) }}
+    minReplicas: {{ $values.minReplicas | default (default 1 $values.miniReplicas) }}
     maxReplicas: {{ $values.maxReplicas | default (default 2147483647 $values.maxiReplicas) }}
     groupName: {{ $groupName }}
     template:
       spec:
         imagePullSecrets: {{- toYaml $.Values.imagePullSecrets | nindent 10 }}
+        initContainers:
+          - name: init
+            image: {{ $values.initContainerImage | default "busybox:1.28" }}
+            command: ['sh', '-c', "until nslookup $FQ_RAY_IP; do echo waiting for K8s Service $FQ_RAY_IP; sleep 2; done"]
+            securityContext:
+            {{- toYaml $values.initContainerSecurityContext | nindent 14 }}
         {{- if $values.serviceAccountName }}
         serviceAccountName: {{ $values.serviceAccountName }}
-        {{- end }}
-        {{- if $values.initContainers }}
-        initContainers: {{- toYaml $values.initContainers | nindent 10 }}
         {{- end }}
         containers:
           - volumeMounts: {{- toYaml $values.volumeMounts | nindent 12 }}
             name: ray-worker
-            {{- if $values.image }}
-            image: {{ $values.image.repository }}:{{ $values.image.tag }}
-            imagePullPolicy: {{ $values.image.pullPolicy }}
-            {{- else }}
-            image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-            imagePullPolicy: {{ .Values.image.pullPolicy }}
-            {{- end }}
+            image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}
+            imagePullPolicy: {{ $.Values.image.pullPolicy }}
             resources: {{- toYaml $values.resources | nindent 14 }}
             securityContext:
             {{- toYaml $values.securityContext | nindent 14 }}
             env:
             {{- toYaml $values.containerEnv | nindent 14}}
-            {{- if $values.envFrom }}
-            envFrom: {{- toYaml $values.envFrom | nindent 14 }}
+            {{- with $values.envFrom }}
+            envFrom: {{- toYaml $ | nindent 14}}
             {{- end }}
             ports: {{- toYaml $values.ports | nindent 14}}
             {{- if $values.lifecycle }}
@@ -171,42 +150,36 @@ spec:
   {{- end }}
   {{- if ne (.Values.worker.disabled | default false) true }}
   - rayStartParams:
-    {{- if and (not .Values.worker.rayStartParams) (not .Values.worker.initArgs) }}
-      {}
-    {{- else }}
-      {{- range $key, $val := .Values.worker.rayStartParams }}
-        {{ $key }}: {{ $val | quote }}
-      {{- end }}
-      {{- /*
-      initArgs is a deprecated alias for rayStartParams.
-      */}}
-      {{- range $key, $val := .Values.worker.initArgs }}
-        {{ $key }}: {{ $val | quote }}
-      {{- end }}
+    {{- range $key, $val := .Values.worker.rayStartParams }}
+      {{ $key }}: {{ $val | quote }}
+    {{- end }}
+    {{- /*
+    initArgs is a deprecated alias for rayStartParams.
+    */}}
+    {{- range $key, $val := .Values.worker.initArgs }}
+      {{ $key }}: {{ $val | quote }}
     {{- end }}
     replicas: {{ .Values.worker.replicas }}
-    minReplicas: {{ .Values.worker.minReplicas | default (default 0 .Values.worker.miniReplicas) }}
+    minReplicas: {{ .Values.worker.minReplicas | default (default 1 .Values.worker.miniReplicas) }}
     maxReplicas: {{ .Values.worker.maxReplicas | default (default 2147483647 .Values.worker.maxiReplicas) }}
     groupName: {{ .Values.worker.groupName }}
     template:
       spec:
         imagePullSecrets: {{- toYaml .Values.imagePullSecrets | nindent 10 }}
+        initContainers:
+          - name: init
+            image: {{ .Values.worker.initContainerImage | default "busybox:1.28" }}
+            command: ['sh', '-c', "until nslookup $FQ_RAY_IP; do echo waiting for K8s Service $FQ_RAY_IP; sleep 2; done"]
+            securityContext:
+            {{- toYaml .Values.worker.initContainerSecurityContext | nindent 14 }}
         {{- if .Values.worker.serviceAccountName }}
         serviceAccountName: {{ .Values.worker.serviceAccountName }}
-        {{- end }}
-        {{- if .Values.worker.initContainers }}
-        initContainers: {{- toYaml .Values.worker.initContainers | nindent 10 }}
         {{- end }}
         containers:
           - volumeMounts: {{- toYaml .Values.worker.volumeMounts | nindent 12 }}
             name: ray-worker
-            {{- if .Values.worker.image }}
-            image: {{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag }}
-            imagePullPolicy: {{ .Values.worker.image.pullPolicy }}
-            {{- else }}
             image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
             imagePullPolicy: {{ .Values.image.pullPolicy }}
-            {{- end }}
             resources: {{- toYaml .Values.worker.resources | nindent 14 }}
             securityContext:
             {{- toYaml .Values.worker.securityContext | nindent 14 }}
