@@ -595,6 +595,16 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/kuberay-operator-1.0.0-rc.0/kuberay-operator-1.0.0-rc.0.tgz
     version: 1.0.0-rc.0
+  - apiVersion: v2
+    created: "2023-10-27T17:07:58.73771357Z"
+    description: A Helm chart for Kubernetes
+    digest: 6f6df08b86b980ff845c488fc53b409fb82012234d2ef3dedf666bc145239c90
+    icon: https://github.com/ray-project/ray/raw/master/doc/source/images/ray_header_logo.png
+    name: kuberay-operator
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/kuberay-operator-0.6.0/kuberay-operator-0.6.0.tgz
+    version: 0.6.0
   nvidia-device-plugin:
   - apiVersion: v2
     appVersion: 0.14.1
@@ -709,4 +719,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-17T12:47:40.993250943Z"
+generated: "2023-10-27T17:07:58.737789572Z"
