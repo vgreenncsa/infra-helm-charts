@@ -708,6 +708,15 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/ray-cluster-1.0.0-rc.0/ray-cluster-1.0.0-rc.0.tgz
     version: 1.0.0-rc.0
+  - apiVersion: v1
+    created: "2023-10-27T17:21:48.346505885Z"
+    description: A Helm chart for Kubernetes
+    digest: 523259ca10175d981e2c245c7fe1bbbf66d542c96b3c2081bd9e4a6a5707a808
+    icon: https://github.com/ray-project/ray/raw/master/doc/source/images/ray_header_logo.png
+    name: ray-cluster
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/ray-cluster-0.5.0/ray-cluster-0.5.0.tgz
+    version: 0.5.0
   reference-app:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -719,4 +728,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-10-27T17:07:58.737789572Z"
+generated: "2023-10-27T17:21:48.346549286Z"
