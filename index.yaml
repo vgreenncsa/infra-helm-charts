@@ -248,6 +248,27 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/airflow-1.11.0/airflow-1.11.0.tgz
     version: 1.11.0
+  appmesh-controller:
+  - apiVersion: v1
+    appVersion: 1.12.7
+    created: "2024-02-18T21:45:05.831869224Z"
+    description: App Mesh controller Helm chart for Kubernetes
+    digest: d287bc8ccb6895d95eaaad1e6721f8b8e911da13989d51b8ce35d9450a157570
+    home: https://github.com/aws/eks-charts
+    icon: https://raw.githubusercontent.com/aws/eks-charts/master/docs/logo/aws.png
+    keywords:
+    - eks
+    - appmesh
+    maintainers:
+    - email: kishorj@users.noreply.github.com
+      name: Kishor Joshi
+      url: https://github.com/kishorj
+    name: appmesh-controller
+    sources:
+    - https://github.com/aws/eks-charts
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/appmesh-controller-1.12.7/appmesh-controller-1.12.7.tgz
+    version: 1.12.7
   argo-cd:
   - apiVersion: v2
     appVersion: 2.5.2
@@ -846,4 +867,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-14T21:31:05.66688583Z"
+generated: "2024-02-18T21:45:05.831938023Z"
