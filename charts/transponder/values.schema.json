@@ -1,0 +1,450 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ketch.com/helm/transponder/values.schema.json",
+  "type": "object",
+  "required": [
+    "global",
+    "config",
+    "ingress",
+    "imageCredentials",
+    "metrics",
+    "serviceAccount"
+  ],
+  "properties": {
+    "global": {
+      "type": "object",
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/image"
+        },
+        "imagePullSecrets": {
+          "type": "array"
+        },
+        "vpa": {
+          "type": "object",
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "serviceAccount": {
+          "$ref": "#/$defs/serviceAccount"
+        }
+      }
+    },
+    "config": {
+      "type": "object",
+      "required": [
+        "org",
+        "id",
+        "sonar",
+        "tls",
+        "vault",
+        "aws"
+      ],
+      "properties": {
+        "org": {
+          "type": "string",
+          "pattern": "^.+$"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z\\d_]+$"
+        },
+        "sonar": {
+          "type": "object",
+          "required": [
+            "resources",
+            "replica",
+            "service",
+            "serviceAccount"
+          ],
+          "properties": {
+            "resources": {
+              "$ref": "#/$defs/resources"
+            },
+            "replica": {
+              "type": "integer"
+            },
+            "service": {
+              "$ref": "#/$defs/service"
+            },
+            "serviceAccount": {
+              "$ref": "#/$defs/serviceAccount"
+            }
+          }
+        },
+        "tls": {
+          "$ref": "#/$defs/tls"
+        },
+        "vault": {
+          "type": "object",
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "address": {
+              "$ref": "#/$defs/url"
+            },
+            "secret": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                }
+              }
+            },
+            "token": {
+              "type": "string"
+            },
+            "prefix": {
+              "$ref": "#/$defs/path"
+            },
+            "tls": {
+              "$ref": "#/$defs/tls"
+            }
+          }
+        },
+        "aws": {
+          "type": "object",
+          "required": [
+            "region",
+            "keyId",
+            "secretKey",
+            "secretsManager"
+          ],
+          "properties": {
+            "region": {
+              "$ref": "#/$defs/awsRegion"
+            },
+            "keyId": {
+              "type": "string"
+            },
+            "secretKey": {
+              "type": "string"
+            },
+            "secretsManager": {
+              "type": "object",
+              "required": [
+                "enabled"
+              ],
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "prefix": {
+                  "$ref": "#/$defs/path"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ingress": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "annotations": {
+          "type": "object",
+          "required": []
+        },
+        "hostname": {
+          "$ref": "#/$defs/hostname"
+        },
+        "class": {
+          "type": "string"
+        },
+        "defaultBackend": {
+          "type": "object",
+          "required": []
+        }
+      }
+    },
+    "imageCredentials": {
+      "$ref": "#/$defs/imageCredentials"
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "serviceMonitor"
+      ],
+      "properties": {
+        "serviceMonitor": {
+          "type": "object",
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "interval": {
+              "$ref": "#/$defs/time"
+            }
+          }
+        }
+      }
+    },
+    "serviceAccount": {
+      "$ref": "#/$defs/serviceAccount"
+    },
+    "initContainers": {
+      "type": "object",
+      "required": [
+        "waitForNATS",
+        "setMachineID"
+      ],
+      "properties": {
+        "waitForNATS": {
+          "$ref": "#/$defs/image"
+        },
+        "setMachineID": {
+          "$ref": "#/$defs/image"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "tls": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "insecure": {
+          "type": "boolean"
+        },
+        "override": {
+          "$ref": "#/$defs/hostname"
+        },
+        "cert": {
+          "type": "object",
+          "required": [
+            "content"
+          ],
+          "properties": {
+            "file": {
+              "$ref": "#/$defs/path"
+            },
+            "content": {
+              "type": "string",
+              "$ref": "#/$defs/base64"
+            }
+          }
+        },
+        "key": {
+          "type": "object",
+          "required": [
+            "content"
+          ],
+          "properties": {
+            "file": {
+              "$ref": "#/$defs/path"
+            },
+            "content": {
+              "$ref": "#/$defs/base64"
+            }
+          }
+        },
+        "rootca": {
+          "type": "object",
+          "required": [
+            "content"
+          ],
+          "properties": {
+            "content": {
+              "$ref": "#/$defs/base64"
+            }
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^[\\w.\\-\/]*$"
+        },
+        "tag": {
+          "$ref": "#/$defs/imageTag"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": ["Always", "Never", "IfNotPresent", ""]
+        }
+      }
+    },
+    "imageCredentials": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registry": {
+          "$ref": "#/$defs/url"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "initialDelaySeconds": {
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "type": "integer"
+        },
+        "successThreshold": {
+          "type": "integer"
+        },
+        "failureThreshold": {
+          "type": "integer"
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "limits": {
+          "$ref": "#/$defs/resource"
+        },
+        "requests": {
+          "$ref": "#/$defs/resource"
+        }
+      }
+    },
+    "resource": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "pattern": "^\\d+[a-zA-Z]{0,2}$"
+        },
+        "memory": {
+          "type": "string",
+          "pattern": "^\\d+[a-zA-Z]{0,2}$"
+        }
+      }
+    },
+    "pdb": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "minAvailable": {
+          "$ref": "#/$defs/percentage"
+        },
+        "maxUnavailable": {
+          "$ref": "#/$defs/percentage"
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ClusterIP","NodePort","LoadBalancer","ExternalName"]
+        },
+        "port": {
+          "type": "integer"
+        }
+      }
+    },
+    "serviceAccount": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "create": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "annotations": {
+          "type": "object"
+        }
+      }
+    },
+    "accessLogging": {
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hostname": {
+      "type": "string",
+      "pattern": "^[\\w.\\-]+$"
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^((http|https):\/\/[\\w\\-.\/]+(:\\d+|)|)$"
+    },
+    "internalURL": {
+      "type": "string",
+      "pattern": "^[\\w.\\-]+(:\\d+|)$"
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^[\\w_.\\-\/]*$"
+    },
+    "awsRegion": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string",
+      "pattern": "^\\d+[a-z]+$"
+    },
+    "percentage": {
+      "type": "string",
+      "pattern": "^\\d+%?$"
+    },
+    "imageTag": {
+      "type": "string",
+      "pattern": "^(latest|\\d+\\.\\d+\\.\\d+|)$"
+    },
+    "base64": {
+      "type": "string",
+      "pattern": "^[\\w=]*$"
+    },
+    "loggingLevel": {
+      "type": "string",
+      "enum": ["trace","debug","info","warn","error", "fatal", ""]
+    }
+  }
+}

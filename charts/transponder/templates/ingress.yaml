@@ -1,0 +1,39 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ketch.transponder.fullname" . }}-ingress
+  labels: {{ include "ketch.transponder.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.ingress.class }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  {{- with .Values.ingress.defaultBackend }}
+  defaultBackend: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if or .Values.ingress.tls .Values.ingress.extraTLS }}
+  tls:
+    {{- if .Values.ingress.tls }}
+    - hosts:
+        - "{{ .Values.ingress.hostname }}"
+      secretName: {{ include "ketch.transponder.fullname" $ }}-tls
+    {{- end }}
+    {{- if .Values.ingress.extraTLS }}
+    {{- toYaml .Values.ingress.extraTLS | nindent 4 }}
+    {{- end }}
+  {{- end }}
+  rules:
+    - host: "{{ .Values.ingress.hostname }}"
+      http:
+        paths:
+          - path: "{{ (.Values.config.transponder.frontend).path | default "/transponder" }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "ketch.transponder.transponder.fullname" . }}
+                port:
+                  number: 443
+{{- end }}

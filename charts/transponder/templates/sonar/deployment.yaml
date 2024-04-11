@@ -1,0 +1,149 @@
+{{- if .Values.config.sonar.enabled -}}
+{{- $loggingLevel := .Values.config.sonar.loggingLevel | default .Values.config.loggingLevel | default "info" -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ketch.transponder.sonar.fullname" . }}
+  labels: {{ include "ketch.transponder.sonar.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.config.sonar.replica }}
+  selector:
+    matchLabels: {{ include "ketch.transponder.sonar.matchLabels" . | nindent 6 }}
+  strategy: {{ include "ketch.transponder.deployment.deploymentStrategy" .Values.config.sonar.deploymentStrategy | nindent 4 }}
+  template:
+    metadata:
+      labels: {{ include "ketch.transponder.sonar.labels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+{{- if .Values.imageCredentials.enabled }}
+        - name: {{ include "ketch.transponder.fullname" . }}-regcred
+{{- end }}
+{{- range .Values.global.imagePullSecrets }}
+        - name: {{ . }}
+{{- end }}
+      containers:
+        - name: sonar
+          image: "{{ include "ketch.transponder.sonar.image" . }}:{{ (.Values.config.sonar.image).tag | default (include "ketch.transponder.version" .) }}"
+          imagePullPolicy: {{ (.Values.config.sonar.image).pullPolicy | default .Values.global.image.pullPolicy }}
+          env:
+            - name: SONAR_DEPLOYMENT_TYPE
+              value: "helm"
+            - name: SONAR_DEPLOYMENT_VERSION
+              value: "{{ .Chart.Version }}"
+            - name: SONAR_ENVIRONMENT
+              value: "{{ .Values.config.environment | default "production" }}"
+            - name: SONAR_APPLIANCE_ID
+              value: "{{ .Values.config.id }}"
+            - name: SONAR_POLL_INTERVAL
+              value: "{{ .Values.config.sonar.interval }}"
+            - name: SONAR_INFERENCE_MODEL_CONFIGURATIONS
+              value: "{{ (.Values.config.sonar.model).file | default "/app/conf/model_inference_config.json" }}"
+            - name: SONAR_LOGLEVEL
+              value: "{{ $loggingLevel }}"
+            - name: SONAR_SERVER_MIDDLEWARE_LOGGING_ENABLED
+              value: "{{ (.Values.config.sonar.accessLogging).enabled | default "true" }}"
+            - name: AWS_DEFAULT_REGION
+              value: "{{ .Values.config.aws.region | default "us-west-2" }}"
+            # Start of Server config
+            - name: SONAR_SERVER_BIND
+              value: "{{ .Values.config.sonar.bind | default "0.0.0.0" }}"
+            - name: SONAR_SERVER_LISTEN
+              value: "{{ .Values.config.sonar.listen | default "5000" }}"
+            - name: SONAR_SERVER_TLS_ENABLED
+              value: "true"
+            - name: SONAR_SERVER_TLS_CERT_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.cert.file" .Values.config }}"
+            - name: SONAR_SERVER_TLS_KEY_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.key.file" .Values.config }}"
+            - name: SONAR_SERVER_TLS_INSECURE
+              value: "{{ .Values.config.tls.insecure | default "false" }}"
+            - name: SONAR_SERVER_TLS_OVERRIDE
+              value: "{{ .Values.config.tls.override }}"
+{{- if .Values.config.tls.rootca.content }}
+            - name: SONAR_SERVER_TLS_ROOTCA_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.rootca.file" .Values.config }}"
+{{- end }}
+            # End of Server config
+            # Start of Gateway config
+            - name: SONAR_WINDLASS_NAME
+              value: "{{ (.Values.config.sonar.gateway).name | default "gateway" }}"
+            - name: SONAR_WINDLASS_URL
+              value: "{{ (.Values.config.sonar.gateway).url | default "https://windlass.ketchapi.com" }}"
+            - name: SONAR_WINDLASS_REQUEST_TIMEOUT
+              value: "{{ (.Values.config.sonar.gateway).timeout | default "30" }}"
+            - name: SONAR_WINDLASS_TLS_ENABLED
+              value: "true"
+{{- with (.Values.config.sonar.gateway).tls }}
+            - name: SONAR_WINDLASS_TLS_INSECURE
+              value: "{{ .insecure | default "false" }}"
+{{- if .override }}
+            - name: SONAR_WINDLASS_TLS_OVERRIDE
+              value: "{{ .override }}"
+{{- end }}
+{{- if .usePrivateCert }}
+            - name: SONAR_WINDLASS_TLS_CERT_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.cert.file" $.Values.config }}"
+            - name: SONAR_WINDLASS_TLS_KEY_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.key.file" $.Values.config }}"
+{{- if $.Values.config.tls.rootca.content }}
+            - name: SONAR_WINDLASS_TLS_ROOTCA_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.rootca.file" $.Values.config }}"
+{{- end }}
+{{- end }}
+{{- end }}
+{{- include "ketch.transponder.deployment.env.secretProvider" (dict "context" . "component" "SONAR") | nindent 12 }}
+            - name: TMPDIR
+              value: "/app/tmp/"
+          readinessProbe: {{ include "ketch.transponder.deployment.readinessProbe" (dict "context" . "component" "sonar") | nindent 12 }}
+          livenessProbe: {{ include "ketch.transponder.deployment.livenessProbe" (dict "context" . "component" "sonar") | nindent 12 }}
+          volumeMounts:
+            - name: storage
+              mountPath: /app/tmp
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+          resources: {{ include "ketch.transponder.deployment.resources" .Values.config.sonar.resources | nindent 12 }}
+          securityContext: {{ include "ketch.transponder.deployment.securityContext" .Values.securityContext | nindent 12 }}
+      volumes:
+        - name: storage
+{{- if .Values.config.sonar.storage.useEmptyDir }}
+          emptyDir: {}
+{{- else }}
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: {{ .Values.config.sonar.storage.accessMode | default (list "ReadWriteOnce") }}
+{{- if .Values.config.sonar.storage.class }}
+                storageClassName: {{ .Values.config.sonar.storage.class }}
+{{- end }}
+                resources:
+                  requests:
+                    storage: {{ .Values.config.sonar.storage.size | default "1Gi" }}
+{{- end }}
+        - name: tls
+          projected:
+            sources:
+{{- include "ketch.transpodner.deployment.volume.server.tls" . | nindent 14 -}}
+{{- include "ketch.transponder.deployment.volume.vault.tls" . | nindent 14 -}}
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+{{- toYaml . | nindent 8 }}
+{{- end }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels: {{ include "ketch.transponder.sonar.matchLabels" . | nindent 20 }}
+                topologyKey: {{ .Values.podAntiAffinityTopologyKey | default "topology.kubernetes.io/zone" }}
+{{- with .Values.affinity }}
+{{- toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations:
+{{- toYaml . | nindent 8 }}
+{{- end }}
+      securityContext: {{ include "ketch.transponder.deployment.podSecurityContext" .Values.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "ketch.transponder.sonar.serviceAccountName" . }}
+{{- end }}

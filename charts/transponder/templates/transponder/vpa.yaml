@@ -1,0 +1,42 @@
+{{/*
+Any configurations to this specific VPA takes precedence. But fallback to the global setting if not set.
+Utilize mergeOverwrite to combine the two dictionaries.
+*/}}
+{{- $vpa := mergeOverwrite (deepCopy .Values.global.vpa) (.Values.config.transponder.vpa | default dict) -}}
+{{- if $vpa.enabled -}}
+apiVersion: "autoscaling.k8s.io/v1"
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ include "ketch.transponder.transponder.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{ include "ketch.transponder.transponder.labels" . | nindent 4 }}
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: {{ include "ketch.transponder.transponder.fullname" . }}
+  updatePolicy:
+    updateMode: "{{ $vpa.updateMode | default "Off" }}"
+  resourcePolicy:
+    containerPolicies:
+      - containerName: transponder
+{{- with $vpa.minimumAllowed }}
+        minAllowed:
+          cpu: {{ .cpu | default "100m" }}
+          memory: {{ .memory | default "128Mi" }}
+{{- else }}
+        minAllowed:
+          cpu: 100m
+          memory: 128Mi
+{{- end }}
+{{- with $vpa.maximumAllowed }}
+        maxAllowed:
+          cpu: {{ .cpu | default "3" }}
+          memory: {{ .memory | default "8192Mi" }}
+{{- else }}
+        maxAllowed:
+          cpu: 3
+          memory: 8192Mi
+{{- end }}
+        controlledResources: [ "cpu", "memory" ]
+{{- end -}}

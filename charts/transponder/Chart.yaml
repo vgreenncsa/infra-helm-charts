@@ -1,0 +1,11 @@
+apiVersion: v2
+appVersion: 0.22.19
+description: Ketch Transponder
+keywords:
+- ketch
+- transponder
+maintainers:
+- email: support@ketch.com
+  name: Ketch Support
+name: transponder
+version: 2.0.3

@@ -1,0 +1,151 @@
+{{- $loggingLevel := .Values.config.transponder.loggingLevel | default .Values.config.loggingLevel | default "info" -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ketch.transponder.transponder.fullname" . }}
+  labels: {{ include "ketch.transponder.transponder.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.config.transponder.replica }}
+  selector:
+    matchLabels: {{ include "ketch.transponder.transponder.matchLabels" . | nindent 6 }}
+  strategy: {{ include "ketch.transponder.deployment.deploymentStrategy" .Values.config.transponder.deploymentStrategy | nindent 4 }}
+  template:
+    metadata:
+      labels: {{ include "ketch.transponder.transponder.labels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+{{- if .Values.imageCredentials.enabled }}
+        - name: {{ include "ketch.transponder.fullname" . }}-regcred
+{{- end }}
+{{- range .Values.global.imagePullSecrets }}
+        - name: {{ . }}
+{{- end }}
+      containers:
+        - name: transponder
+          image: "{{ include "ketch.transponder.transponder.image" . }}:{{ (.Values.config.transponder.image).tag | default (include "ketch.transponder.version" .) }}"
+          imagePullPolicy: {{ (.Values.config.transponder.image).pullPolicy | default .Values.global.image.pullPolicy }}
+          env:
+            - name: TRANSPONDER_DEPLOYMENT_TYPE
+              value: "helm"
+            - name: TRANSPONDER_DEPLOYMENT_VERSION
+              value: "{{ .Chart.Version }}"
+            - name: TRANSPONDER_ENVIRONMENT
+              value: "{{ .Values.config.environment | default "production" }}"
+            - name: TRANSPONDER_ORG_CODE
+              value: "{{ .Values.config.org }}"
+            - name: TRANSPONDER_APPLIANCE_ID
+              value: "{{ .Values.config.id }}"
+            - name: TRANSPONDER_CONNECTION_TIMEOUT
+              value: "{{ .Values.config.transponder.connectionTimeout | default "1m" }}"
+{{- /* This `if` will allow us to support `.Values.config.transponder.batch.enabled` == `false` */ -}}
+{{- if eq (toString (.Values.config.transponder.batch).enabled) "false" }}
+            - name: TRANSPONDER_BATCH_ENABLED
+              value: "{{ (.Values.config.transponder.batch).enabled }}"
+{{- else }}
+            - name: TRANSPONDER_BATCH_ENABLED
+              value: "{{ (.Values.config.transponder.batch).enabled | default true }}"
+{{- end }}
+            - name: TRANSPONDER_BATCH_SIZE
+              value: "{{ (.Values.config.transponder.batch).size | default "1000" }}"
+            - name: TRANSPONDER_FRONTEND_BASE_URL
+              value: "{{ (.Values.config.transponder.frontend).path | default "/transponder" }}"
+            - name: TRANSPONDER_LOGLEVEL
+              value: "{{ $loggingLevel }}"
+            - name: TRANSPONDER_SERVER_MIDDLEWARE_LOGGING_ENABLED
+              value: "{{ (.Values.config.transponder.accessLogging).enabled | default "true" }}"
+            - name: AWS_DEFAULT_REGION
+              value: "{{ .Values.config.aws.region | default "us-west-2" }}"
+            - name: GRPC_GO_RETRY
+              value: "on"
+{{- if eq $loggingLevel "trace" }}
+            - name: GRPC_TRACE
+              value: "all"
+            - name: GRPC_VERBOSITY
+              value: "{{ $loggingLevel }}"
+            - name: GRPC_GO_LOG_VERBOSITY_LEVEL
+              value: "99"
+            - name: GRPC_GO_LOG_SEVERITY_LEVEL
+              value: "{{ $loggingLevel }}"
+{{- end }}
+            # Start of Server config
+            - name: TRANSPONDER_SERVER_BIND
+              value: "{{ .Values.config.transponder.bind | default "0.0.0.0" }}"
+            - name: TRANSPONDER_SERVER_LISTEN
+              value: "{{ .Values.config.transponder.listen | default "5000" }}"
+            - name: TRANSPONDER_SERVER_TLS_ENABLED
+              value: "true"
+            - name: TRANSPONDER_SERVER_TLS_CERT_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.cert.file" .Values.config }}"
+            - name: TRANSPONDER_SERVER_TLS_KEY_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.key.file" .Values.config }}"
+            - name: TRANSPONDER_SERVER_TLS_INSECURE
+              value: "{{ .Values.config.tls.insecure | default "false" }}"
+            - name: TRANSPONDER_SERVER_TLS_OVERRIDE
+              value: "{{ .Values.config.tls.override }}"
+{{- if .Values.config.tls.rootca.content }}
+            - name: TRANSPONDER_SERVER_TLS_ROOTCA_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.rootca.file" .Values.config }}"
+{{- end }}
+            # End of Server config
+            # Start of Gateway config
+            - name: TRANSPONDER_WINDLASS_NAME
+              value: "{{ (.Values.config.transponder.gateway).name | default "gateway" }}"
+            - name: TRANSPONDER_WINDLASS_URL
+              value: "{{ (.Values.config.transponder.gateway).url | default "windlass.ketchapi.com:443" }}"
+            - name: TRANSPONDER_WINDLASS_TLS_ENABLED
+              value: "true"
+{{- with (.Values.config.transponder.gateway).tls }}
+            - name: TRANSPONDER_WINDLASS_TLS_INSECURE
+              value: "{{ .insecure | default "false" }}"
+{{- if .override }}
+            - name: TRANSPONDER_WINDLASS_TLS_OVERRIDE
+              value: "{{ .override }}"
+{{- end }}
+{{- if .usePrivateCert }}
+            - name: TRANSPONDER_WINDLASS_TLS_CERT_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.cert.file" $.Values.config }}"
+            - name: TRANSPONDER_WINDLASS_TLS_KEY_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.key.file" $.Values.config }}"
+{{- if $.Values.config.tls.rootca.content }}
+            - name: TRANSPONDER_WINDLASS_TLS_ROOTCA_FILE
+              value: "/tls/{{ include "ketch.transponder.tls.rootca.file" $.Values.config }}"
+{{- end }}
+{{- end }}
+{{- end }}
+            # End of Gateway config
+{{- include "ketch.transponder.deployment.env.secretProvider" (dict "context" . "component" "TRANSPONDER") | nindent 12 }}
+          readinessProbe: {{ include "ketch.transponder.deployment.readinessProbe" (dict "context" . "component" "transponder") | nindent 12 }}
+          livenessProbe: {{ include "ketch.transponder.deployment.livenessProbe" (dict "context" . "component" "transponder") | nindent 12 }}
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+          resources: {{ include "ketch.transponder.deployment.resources" .Values.config.transponder.resources | nindent 12 }}
+          securityContext: {{ include "ketch.transponder.deployment.securityContext" .Values.securityContext | nindent 12 }}
+      volumes:
+        - name: tls
+          projected:
+            sources:
+{{- include "ketch.transpodner.deployment.volume.server.tls" . | nindent 14 -}}
+{{- include "ketch.transponder.deployment.volume.vault.tls" . | nindent 14 -}}
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+{{- toYaml . | nindent 8 }}
+{{- end }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels: {{ include "ketch.transponder.transponder.matchLabels" . | nindent 20 }}
+                topologyKey: {{ .Values.podAntiAffinityTopologyKey | default "topology.kubernetes.io/zone" }}
+{{- with .Values.affinity }}
+{{- toYaml . | nindent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations:
+{{- toYaml . | nindent 8 }}
+{{- end }}
+      securityContext: {{ include "ketch.transponder.deployment.podSecurityContext" .Values.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "ketch.transponder.transponder.serviceAccountName" . }}
