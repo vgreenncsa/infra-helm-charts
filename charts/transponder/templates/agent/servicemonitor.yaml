@@ -1,0 +1,22 @@
+{{- if and .Values.metrics.serviceMonitor.enabled .Values.config.agent.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "ketch.transponder.agent.fullname" . }}
+  labels: {{ include "ketch.transponder.agent.labels" . | nindent 4 }}
+spec:
+  jobLabel: {{ include "ketch.transponder.agent.fullname" . }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels: {{ include "ketch.transponder.agent.matchLabels" . | nindent 6 }}
+  endpoints:
+    - port: https
+      path: /metrics
+      scheme: https
+      interval: {{ .Values.metrics.serviceMonitor.interval }}
+      tlsConfig:
+        serverName: {{ .Values.config.tls.override }}
+        insecureSkipVerify: true
+{{- end -}}
