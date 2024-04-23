@@ -912,6 +912,21 @@ entries:
   transponder:
   - apiVersion: v2
     appVersion: 0.22.19
+    created: "2024-04-23T12:35:31.263617149Z"
+    description: Ketch Transponder
+    digest: 115fd53de5e38ce7f8dc3311681c41cf5379371cd115d71ff65b48a51af772bc
+    keywords:
+    - ketch
+    - transponder
+    maintainers:
+    - email: support@ketch.com
+      name: Ketch Support
+    name: transponder
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.5/transponder-2.0.5.tgz
+    version: 2.0.5
+  - apiVersion: v2
+    appVersion: 0.22.19
     created: "2024-04-23T11:59:11.988142167Z"
     description: Ketch Transponder
     digest: af99051f9928bc413b62aa26730fe607f4bd3ee269b329b89e6427e1aa72e405
@@ -940,4 +955,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2024-04-23T11:59:11.988190467Z"
+generated: "2024-04-23T12:35:31.263682551Z"
