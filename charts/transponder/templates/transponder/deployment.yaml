@@ -73,13 +73,13 @@ spec:
             - name: TRANSPONDER_SERVER_LISTEN
               value: "{{ .Values.config.transponder.listen | default "5000" }}"
             - name: TRANSPONDER_SERVER_TLS_ENABLED
-              value: "true"
+              value: "false"
             - name: TRANSPONDER_SERVER_TLS_CERT_FILE
               value: "/tls/{{ include "ketch.transponder.tls.cert.file" .Values.config }}"
             - name: TRANSPONDER_SERVER_TLS_KEY_FILE
               value: "/tls/{{ include "ketch.transponder.tls.key.file" .Values.config }}"
             - name: TRANSPONDER_SERVER_TLS_INSECURE
-              value: "{{ .Values.config.tls.insecure | default "false" }}"
+              value: "{{ .Values.config.tls.insecure | default "true" }}"
             - name: TRANSPONDER_SERVER_TLS_OVERRIDE
               value: "{{ .Values.config.tls.override }}"
 {{- if .Values.config.tls.rootca.content }}
@@ -93,10 +93,10 @@ spec:
             - name: TRANSPONDER_WINDLASS_URL
               value: "{{ (.Values.config.transponder.gateway).url | default "windlass.ketchapi.com:443" }}"
             - name: TRANSPONDER_WINDLASS_TLS_ENABLED
-              value: "true"
+              value: "false"
 {{- with (.Values.config.transponder.gateway).tls }}
             - name: TRANSPONDER_WINDLASS_TLS_INSECURE
-              value: "{{ .insecure | default "false" }}"
+              value: "{{ .insecure | default "true" }}"
 {{- if .override }}
             - name: TRANSPONDER_WINDLASS_TLS_OVERRIDE
               value: "{{ .override }}"
