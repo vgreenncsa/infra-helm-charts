@@ -223,6 +223,11 @@ ingress:
   #    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   #  class: "nginx"
 
+publicIngress:
+  enabled: true
+  environment: ""
+  class: ""
+
 imageCredentials:
   # -- Enable imagePullSecret
   enabled: true
