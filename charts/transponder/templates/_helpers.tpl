@@ -169,7 +169,7 @@ rollingUpdate:
 httpGet:
   path: /healthz
   port: {{ $port | default "5000" }}
-  scheme: HTTPS
+  scheme: HTTP
   httpHeaders:
     - name: Host
       value: {{ $tls_host | default "transponder" }}

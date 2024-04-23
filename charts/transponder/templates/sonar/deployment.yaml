@@ -50,13 +50,13 @@ spec:
             - name: SONAR_SERVER_LISTEN
               value: "{{ .Values.config.sonar.listen | default "5000" }}"
             - name: SONAR_SERVER_TLS_ENABLED
-              value: "true"
+              value: "false"
             - name: SONAR_SERVER_TLS_CERT_FILE
               value: "/tls/{{ include "ketch.transponder.tls.cert.file" .Values.config }}"
             - name: SONAR_SERVER_TLS_KEY_FILE
               value: "/tls/{{ include "ketch.transponder.tls.key.file" .Values.config }}"
             - name: SONAR_SERVER_TLS_INSECURE
-              value: "{{ .Values.config.tls.insecure | default "false" }}"
+              value: "{{ .Values.config.tls.insecure | default "true" }}"
             - name: SONAR_SERVER_TLS_OVERRIDE
               value: "{{ .Values.config.tls.override }}"
 {{- if .Values.config.tls.rootca.content }}
@@ -72,10 +72,10 @@ spec:
             - name: SONAR_WINDLASS_REQUEST_TIMEOUT
               value: "{{ (.Values.config.sonar.gateway).timeout | default "30" }}"
             - name: SONAR_WINDLASS_TLS_ENABLED
-              value: "true"
+              value: "false"
 {{- with (.Values.config.sonar.gateway).tls }}
             - name: SONAR_WINDLASS_TLS_INSECURE
-              value: "{{ .insecure | default "false" }}"
+              value: "{{ .insecure | default "true" }}"
 {{- if .override }}
             - name: SONAR_WINDLASS_TLS_OVERRIDE
               value: "{{ .override }}"
