@@ -658,6 +658,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/cilium-1.15.0/cilium-1.15.0.tgz
     version: 1.15.0
+  cloudflare-cloudflared:
+  - apiVersion: v2
+    appVersion: 2024.8.3
+    created: "2024-08-29T19:32:13.023892663Z"
+    description: A Helm chart for deploying cloudflared to Kubernetes
+    digest: 45a3cd10dcd86475e9402039cdd808722ace56100522272ca822ea430227eb00
+    name: cloudflare-cloudflared
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/cloudflare-cloudflared-0.1.0/cloudflare-cloudflared-0.1.0.tgz
+    version: 0.1.0
   external-dns:
   - apiVersion: v2
     appVersion: 0.11.0
@@ -970,4 +981,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2024-04-23T16:48:48.121177857Z"
+generated: "2024-08-29T19:32:13.023943327Z"
