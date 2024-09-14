@@ -4,12 +4,10 @@
 
 replicaCount: 1
 
+karpenterControllerRole: ""
+
 affinity:
   nodeAffinity:
     nodeGroup: ""
 
-accountNumber: ""
-
 clusterName: ""
-
-defaultInstanceProfile: ""

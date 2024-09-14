@@ -1,16 +1,8 @@
 ---
-# Source: karpenter/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: karpenter
-  namespace: karpenter
-  labels:
-    helm.sh/chart: karpenter-v0.31.0
-    app.kubernetes.io/name: karpenter
-    app.kubernetes.io/instance: karpenter
-    app.kubernetes.io/version: "0.31.0"
-    app.kubernetes.io/managed-by: Helm
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 10
@@ -27,16 +19,17 @@ spec:
         app.kubernetes.io/name: karpenter
         app.kubernetes.io/instance: karpenter
       annotations:
-        checksum/settings: dad090af5844807924526f701990fc35265e68767b7b41b7c114171966d2e046
     spec:
       serviceAccountName: karpenter
+      securityContext:
+        fsGroup: 65532
       priorityClassName: "system-cluster-critical"
-      dnsPolicy: Default
+      dnsPolicy: ClusterFirst
       containers:
         - name: controller
           securityContext:
-            runAsUser: 65536
-            runAsGroup: 65536
+            runAsUser: 65532
+            runAsGroup: 65532
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
@@ -45,7 +38,7 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
-          image: public.ecr.aws/karpenter/controller:v0.31.0@sha256:d29767fa9c5c0511a3812397c932f5735234f03a7a875575422b712d15e54a77
+          image: public.ecr.aws/karpenter/controller:1.0.1@sha256:fc54495b35dfeac6459ead173dd8452ca5d572d90e559f09536a494d2795abe6
           imagePullPolicy: IfNotPresent
           env:
             - name: KUBERNETES_MIN_VERSION
@@ -54,8 +47,14 @@ spec:
               value: karpenter
             - name: WEBHOOK_PORT
               value: "8443"
+            - name: WEBHOOK_METRICS_PORT
+              value: "8001"
+            - name: DISABLE_WEBHOOK
+              value: "false"
+            - name: LOG_LEVEL
+              value: "info"
             - name: METRICS_PORT
-              value: "8000"
+              value: "8080"
             - name: HEALTH_PROBE_PORT
               value: "8081"
             - name: SYSTEM_NAMESPACE
@@ -68,15 +67,30 @@ spec:
                   containerName: controller
                   divisor: "0"
                   resource: limits.memory
+            - name: FEATURE_GATES
+              value: "SpotToSpotConsolidation=false"
+            - name: BATCH_MAX_DURATION
+              value: "10s"
+            - name: BATCH_IDLE_DURATION
+              value: "1s"
+            - name: CLUSTER_NAME
+              value: "{{ .Values.clusterName }}"
+            - name: VM_MEMORY_OVERHEAD_PERCENT
+              value: "0.075"
+            - name: RESERVED_ENIS
+              value: "0"
           ports:
             - name: http-metrics
-              containerPort: 8000
+              containerPort: 8080
               protocol: TCP
-            - name: http
-              containerPort: 8081
+            - name: webhook-metrics
+              containerPort: 8001
               protocol: TCP
             - name: https-webhook
               containerPort: 8443
+              protocol: TCP
+            - name: http
+              containerPort: 8081
               protocol: TCP
           livenessProbe:
             initialDelaySeconds: 30
@@ -105,13 +119,12 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: karpenter.sh/provisioner-name
+              - key: karpenter.sh/nodepool
                 operator: DoesNotExist
-            - matchExpressions:
               - key: eks.amazonaws.com/nodegroup
                 operator: In
                 values:
-                - "{{ .Values.affinity.nodeAffinity.nodeGroup }}"
+                  - {{ .Values.affinity.nodeAffinity.nodeGroup }}
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
@@ -127,7 +140,7 @@ spec:
               app.kubernetes.io/name: karpenter
           maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
-          whenUnsatisfiable: ScheduleAnyway
+          whenUnsatisfiable: DoNotSchedule
       tolerations:
         - key: CriticalAddonsOnly
           operator: Exists
