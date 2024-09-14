@@ -1,22 +1,19 @@
 ---
-# Source: karpenter/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: karpenter
   namespace: karpenter
-  labels:
-    helm.sh/chart: karpenter-v0.31.0
-    app.kubernetes.io/name: karpenter
-    app.kubernetes.io/instance: karpenter
-    app.kubernetes.io/version: "0.31.0"
-    app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
   ports:
     - name: http-metrics
-      port: 8000
+      port: 8080
       targetPort: http-metrics
+      protocol: TCP
+    - name: webhook-metrics
+      port: 8001
+      targetPort: webhook-metrics
       protocol: TCP
     - name: https-webhook
       port: 8443
@@ -25,3 +22,4 @@ spec:
   selector:
     app.kubernetes.io/name: karpenter
     app.kubernetes.io/instance: karpenter
+
