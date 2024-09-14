@@ -757,6 +757,16 @@ entries:
     version: 3.1.0
   karpenter:
   - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2024-09-14T20:54:35.108808155Z"
+    description: A Helm chart for deploying Karpenter to Kubernetes
+    digest: caa68346c90209ad03ec58b227361a28bf0933f42ab2b368efb3b29d196794d0
+    name: karpenter
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/karpenter-1.0.1/karpenter-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 0.31.0
     created: "2024-09-12T05:56:26.042012709Z"
     description: A Helm chart for deploying Karpenter to Kubernetes
@@ -991,4 +1001,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2024-09-12T05:56:26.042071689Z"
+generated: "2024-09-14T20:54:35.10886897Z"
