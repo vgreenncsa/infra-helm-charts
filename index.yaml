@@ -922,6 +922,15 @@ entries:
     version: 25.1.0
   ray-cluster:
   - apiVersion: v1
+    created: "2024-10-03T18:11:27.243065103Z"
+    description: A Helm chart for Kubernetes
+    digest: 191bb58b0e9e70f5f885202edb0671c64896b513b6d8c065d3c16ffc23c42be5
+    icon: https://github.com/ray-project/ray/raw/master/doc/source/images/ray_header_logo.png
+    name: ray-cluster
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/ray-cluster-1.2.2/ray-cluster-1.2.2.tgz
+    version: 1.2.2
+  - apiVersion: v1
     created: "2023-10-16T12:11:44.67809432Z"
     description: A Helm chart for Kubernetes
     digest: bb653ca72a87209f54a6b8e220e8e107969e14d7521f41eeb9a4cef2ec424adc
@@ -1011,4 +1020,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2024-10-03T18:07:33.56452548Z"
+generated: "2024-10-03T18:11:27.243152846Z"
