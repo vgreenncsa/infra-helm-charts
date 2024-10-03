@@ -798,6 +798,16 @@ entries:
     version: 1.0.0-rc.0
   kuberay-operator:
   - apiVersion: v2
+    created: "2024-10-03T18:07:33.564463956Z"
+    description: A Helm chart for Kubernetes
+    digest: 10ab0f3de3747fd2bf783e841ef5e915235217370979579195b185e4ed71ca45
+    icon: https://github.com/ray-project/ray/raw/master/doc/source/images/ray_header_logo.png
+    name: kuberay-operator
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/kuberay-operator-1.2.2/kuberay-operator-1.2.2.tgz
+    version: 1.2.2
+  - apiVersion: v2
     created: "2023-10-16T12:03:31.00859476Z"
     description: A Helm chart for Kubernetes
     digest: c869425d696d269fb03ddeaf00f600add4dae3fa2a8daeec0f04ba29119e4364
@@ -1001,4 +1011,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2024-09-14T20:54:35.10886897Z"
+generated: "2024-10-03T18:07:33.56452548Z"
