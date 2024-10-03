@@ -4,6 +4,9 @@ metadata:
   name: {{ include "kuberay-operator.fullname" . }}
   labels:
 {{ include "kuberay-operator.labels" . | indent 4 }}
+{{- if .Values.labels }}
+{{- toYaml .Values.labels | nindent 4 }}
+{{- end }}
 spec:
   replicas: 1
   strategy:
@@ -18,13 +21,24 @@ spec:
         app.kubernetes.io/name: {{ include "kuberay-operator.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: kuberay-operator
+        {{- if .Values.labels }}
+        {{- toYaml .Values.labels | nindent 8 }}
+        {{- end }}
+      {{- if .Values.annotations }}
+      annotations:
+        {{- toYaml .Values.annotations | nindent 8 }}
+      {{- end }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       serviceAccountName: {{ .Values.serviceAccount.name  }}
-      volumes: []
+      {{- if and (.Values.logging.baseDir) (.Values.logging.fileName) }}
+      volumes:
+        - name: kuberay-logs
+          emptyDir: {}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -33,13 +47,23 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          volumeMounts: []
+          {{- if and (.Values.logging.baseDir) (.Values.logging.fileName) }}
+          volumeMounts:
+            - name: kuberay-logs
+              mountPath: "{{ .Values.logging.baseDir }}"
+          {{- end }}
           command:
             - /manager
           args:
             {{- $argList := list -}}
+            {{- $argList = append $argList (include "kuberay.featureGates" . | trim) -}}
+            {{- if .Values.batchScheduler -}}
             {{- if .Values.batchScheduler.enabled -}}
             {{- $argList = append $argList "--enable-batch-scheduler" -}}
+            {{- end -}}
+            {{- if .Values.batchScheduler.name -}}
+            {{- $argList = append $argList (printf "--batch-scheduler=%s" .Values.batchScheduler.name) -}}
+            {{- end -}}
             {{- end -}}
             {{- $watchNamespace := "" -}}
             {{- if and .Values.singleNamespaceInstall (not .Values.watchNamespace) -}}
@@ -51,13 +75,31 @@ spec:
             {{- $argList = append $argList "--watch-namespace" -}}
             {{- $argList = append $argList $watchNamespace -}}
             {{- end -}}
+            {{- if and (.Values.logging.baseDir) (.Values.logging.fileName) -}}
+            {{- $argList = append $argList "--log-file-path" -}}
+            {{- $argList = append $argList (printf "%s/%s" .Values.logging.baseDir .Values.logging.fileName) -}}
+            {{- end -}}
+            {{- if .Values.logging.stdoutEncoder -}}
+            {{- $argList = append $argList "--log-stdout-encoder" -}}
+            {{- $argList = append $argList .Values.logging.stdoutEncoder -}}
+            {{- end -}}
+            {{- if .Values.logging.fileEncoder -}}
+            {{- $argList = append $argList "--log-file-encoder" -}}
+            {{- $argList = append $argList .Values.logging.fileEncoder -}}
+            {{- end -}}
+            {{- if hasKey .Values "useKubernetesProxy" -}}
+            {{- $argList = append $argList (printf "--use-kubernetes-proxy=%t" .Values.useKubernetesProxy) -}}
+            {{- end -}}
+            {{- if hasKey .Values "leaderElectionEnabled" -}}
+            {{- $argList = append $argList (printf "--enable-leader-election=%t" .Values.leaderElectionEnabled) -}}
+            {{- end -}}
             {{- (printf "\n") -}}
             {{- $argList | toYaml | indent 12 }}
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
-          env: 
+          env:
           {{- toYaml .Values.env | nindent 12}}
           livenessProbe:
             httpGet:
