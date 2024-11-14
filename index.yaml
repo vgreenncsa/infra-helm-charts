@@ -959,6 +959,38 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/reference-app-0.1.0/reference-app-0.1.0.tgz
     version: 0.1.0
+  strimzi-kafka-operator:
+  - apiVersion: v2
+    appVersion: 0.44.0
+    created: "2024-11-14T16:40:47.832869603Z"
+    description: 'Strimzi: Apache Kafka running on Kubernetes'
+    digest: 43e5b6ef7ccd1ac05f0c73e6cc73498a980948708bbbb817a86d3b361876d2d2
+    home: https://strimzi.io/
+    icon: https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/main/documentation/logo/strimzi_logo.png
+    keywords:
+    - kafka
+    - queue
+    - stream
+    - event
+    - messaging
+    - datastore
+    - topic
+    maintainers:
+    - name: Frawless
+    - name: ppatierno
+    - name: samuel-hawker
+    - name: scholzj
+    - name: tombentley
+    - name: sknot-rh
+    - name: PaulRMellor
+    - name: im-konge
+    - name: see-quick
+    name: strimzi-kafka-operator
+    sources:
+    - https://github.com/strimzi/strimzi-kafka-operator
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/strimzi-kafka-operator-0.44.0/strimzi-kafka-operator-0.44.0.tgz
+    version: 0.44.0
   transponder:
   - apiVersion: v2
     appVersion: 0.22.19
@@ -1020,4 +1052,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2024-10-03T18:11:27.243152846Z"
+generated: "2024-11-14T16:40:47.832927742Z"
