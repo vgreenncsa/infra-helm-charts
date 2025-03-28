@@ -12,6 +12,8 @@ image:
 
 domainFilter: ""
 
+regexDomainFilter: ""
+
 provider: "aws"
 
 awsZoneType: "private"
