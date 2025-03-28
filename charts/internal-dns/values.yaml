@@ -19,3 +19,5 @@ awsZoneType: "private"
 ingressClass: "nginx-private"
 
 awsRegion: "us-east-1"
+
+txtOwnerId: ""
