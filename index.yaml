@@ -750,6 +750,16 @@ entries:
   internal-dns:
   - apiVersion: v2
     appVersion: 0.11.0
+    created: "2025-03-28T13:31:45.191733493Z"
+    description: A Helm chart for Kubernetes
+    digest: 71fe137718dece6da2ef49961aabe5b12dc348cfc8be13abd0c3a2cf09f9fc7b
+    name: internal-dns
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/internal-dns-0.1.2/internal-dns-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.11.0
     created: "2023-10-09T14:13:38.865250131Z"
     description: A Helm chart for Kubernetes
     digest: 9ff82b9eb2f8e21b87fccff5c6769dcd50e4d59f3847ceaedf266566c6e38b88
@@ -1149,4 +1159,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2025-03-25T15:33:45.347134632Z"
+generated: "2025-03-28T13:31:45.191797763Z"
