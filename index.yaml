@@ -672,6 +672,16 @@ entries:
   external-dns:
   - apiVersion: v2
     appVersion: 0.11.0
+    created: "2025-03-28T13:36:56.867625283Z"
+    description: A Helm chart for Kubernetes
+    digest: b3c30c298652906c3e0b9862500a2dbf7fbf5798578687cb24cec4ea6e9c4d83
+    name: external-dns
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/external-dns-0.1.2/external-dns-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.11.0
     created: "2023-10-09T14:34:08.695375284Z"
     description: A Helm chart for Kubernetes
     digest: 0030b63b3fe6826b0c1475eba1286aacf4f1e748d2fcb4646bf3893b6381cc52
@@ -1159,4 +1169,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2025-03-28T13:31:45.191797763Z"
+generated: "2025-03-28T13:36:56.867699623Z"
