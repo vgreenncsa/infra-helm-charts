@@ -1189,4 +1189,21 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.0.3/transponder-2.0.3.tgz
     version: 2.0.3
-generated: "2025-03-28T17:25:20.435369779Z"
+  trivy-operator:
+  - apiVersion: v2
+    appVersion: 0.22.0
+    created: "2025-03-30T17:20:58.515554749Z"
+    description: Keeps security report resources updated
+    digest: a410911a8b3829db29bfc2e644fc732011dd9fcc9aaada8a6281b36ca3dbf478
+    keywords:
+    - aquasecurity
+    - trivyoperator
+    - trivy
+    name: trivy-operator
+    sources:
+    - https://github.com/aquasecurity/trivy-operator
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
+    version: 0.24.1
+generated: "2025-03-30T17:20:58.515654014Z"
