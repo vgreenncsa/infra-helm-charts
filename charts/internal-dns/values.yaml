@@ -8,13 +8,7 @@ image:
   repository: k8s.gcr.io/external-dns/external-dns
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.16.1"
-
-domainFilter: ""
-
-regexDomainFilter: ""
-
-provider: "aws"
+  tag: "v0.11.0"
 
 awsZoneType: "private"
 
