@@ -23,7 +23,6 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
-            - --source=service
             - --source=ingress
             - --provider={{ .Values.provider }}
             - --aws-zone-type={{ .Values.awsZoneType }} # only look at private hosted zones (valid values are public, private or no value for both)
