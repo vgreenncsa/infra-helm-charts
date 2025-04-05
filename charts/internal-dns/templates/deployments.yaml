@@ -24,7 +24,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - --source=ingress
-            - --regex-domain-filter={{ .Values.regexDomainFilter }} # example* by domain suffix but as a regex - overrides domain-filter
             - --provider={{ .Values.provider }}
             - --aws-zone-type={{ .Values.awsZoneType }} # only look at private hosted zones (valid values are public, private or no value for both)
             - --registry=txt

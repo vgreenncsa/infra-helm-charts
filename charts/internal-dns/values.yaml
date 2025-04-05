@@ -10,12 +10,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v0.16.1"
 
-domainFilter: ""
-
-regexDomainFilter: ""
-
-provider: "aws"
-
 awsZoneType: "private"
 
 ingressClass: "nginx-private"
