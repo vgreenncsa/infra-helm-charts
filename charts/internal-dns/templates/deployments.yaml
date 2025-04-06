@@ -23,12 +23,13 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
+            - --source=service
             - --source=ingress
             - --provider={{ .Values.provider }}
             - --aws-zone-type={{ .Values.awsZoneType }} # only look at private hosted zones (valid values are public, private or no value for both)
             - --registry=txt
             - --txt-owner-id={{ .Values.txtOwnerId }} # unique per cluster id
-            - --ingress-class={{ .Values.ingressClass }}
+            - --annotation-filter=kubernetes.io/ingress.class in {{ .Values.ingressClass }}
           env:
             - name: AWS_DEFAULT_REGION
               value: {{ .Values.awsRegion }} # change to region where EKS is installed
