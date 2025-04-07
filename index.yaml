@@ -800,6 +800,16 @@ entries:
   internal-dns:
   - apiVersion: v2
     appVersion: 0.11.0
+    created: "2025-04-07T17:07:47.263168584Z"
+    description: A Helm chart for Kubernetes
+    digest: 89fe825e44553c70e0166af189d1acf4558d206fe04ac2b46fc2f5024d0ea29e
+    name: internal-dns
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/internal-dns-0.1.8/internal-dns-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 0.11.0
     created: "2025-04-06T11:02:34.022719419Z"
     description: A Helm chart for Kubernetes
     digest: 2eb6f77bdba627e64032e0f29a85f22a37198d8c2a9e24a39e7ecd6d03cb9d1b
@@ -1292,4 +1302,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-07T16:57:32.030902412Z"
+generated: "2025-04-07T17:07:47.263261738Z"
