@@ -19,6 +19,9 @@ spec:
       labels:
         app.kubernetes.io/name: argo-rollouts
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
       - image: quay.io/argoproj/argo-rollouts:v1.3.1
         imagePullPolicy: Always
