@@ -47,8 +47,6 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp
-      nodeSelector:
-        kubernetes.io/os: linux
       securityContext:
         runAsNonRoot: true
       serviceAccountName: argo-server
@@ -104,8 +102,6 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
-      nodeSelector:
-        kubernetes.io/os: linux
       priorityClassName: workflow-controller
       securityContext:
         runAsNonRoot: true
