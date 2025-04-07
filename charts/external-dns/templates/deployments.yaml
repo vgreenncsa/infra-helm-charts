@@ -19,7 +19,7 @@ spec:
     spec:
       serviceAccountName: external-dns
       {{- if .Values.nodeSelector }}
-      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 3 }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
       {{- end }}
       containers:
         - name: external-dns
