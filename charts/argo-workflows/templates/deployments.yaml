@@ -12,6 +12,9 @@ spec:
       labels:
         app: argo-server
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
       - args:
         - server
@@ -67,6 +70,9 @@ spec:
       labels:
         app: workflow-controller
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
       - args: []
         command:
