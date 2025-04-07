@@ -18,6 +18,9 @@ spec:
         app.kubernetes.io/name: external-dns
     spec:
       serviceAccountName: external-dns
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 3 }}
+      {{- end }}
       containers:
         - name: external-dns
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
