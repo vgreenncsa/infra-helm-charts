@@ -385,6 +385,16 @@ entries:
   argo-events:
   - apiVersion: v2
     appVersion: 1.8.1
+    created: "2025-04-07T18:10:45.503677719Z"
+    description: The Event-Based Dependency Manager for Kubernetes
+    digest: 958f994548b41a8ca5e8acc6c8930fbabd50b24a9a639cba56c405f865010aca
+    name: argo-events
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-events-0.2.2/argo-events-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 1.8.1
     created: "2023-10-09T14:40:17.787558819Z"
     description: The Event-Based Dependency Manager for Kubernetes
     digest: 3fb9e2851fafbedacf9c8f417bcc47e8c376943129a6f00162daf79a3461c12e
@@ -1312,4 +1322,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-07T17:46:10.630299526Z"
+generated: "2025-04-07T18:10:45.503824836Z"
