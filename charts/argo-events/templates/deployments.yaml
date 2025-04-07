@@ -13,6 +13,9 @@ spec:
       labels:
         app: controller-manager
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
       - args:
         - controller
@@ -65,6 +68,9 @@ spec:
       labels:
         app: events-webhook
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
       - args:
         - webhook-service
