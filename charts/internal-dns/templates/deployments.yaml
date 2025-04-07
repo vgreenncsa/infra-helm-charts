@@ -18,6 +18,9 @@ spec:
         app.kubernetes.io/name: internal-dns
     spec:
       serviceAccountName: internal-dns
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       containers:
         - name: internal-dns
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
