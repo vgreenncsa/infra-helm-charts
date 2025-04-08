@@ -952,6 +952,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/jupyterhub-3.1.0/jupyterhub-3.1.0.tgz
     version: 3.1.0
+  k8s-events-watcher:
+  - apiVersion: v2
+    appVersion: 0.1.10
+    created: "2025-04-08T16:58:32.522452693Z"
+    description: A Helm chart that exports Kubernetes Events
+    digest: 4b58379a6e09dc1b5d3d978d4e80233b74fad19b5e82a92457930677762d4408
+    name: k8s-events-watcher
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/k8s-events-watcher-0.1.0/k8s-events-watcher-0.1.0.tgz
+    version: 0.1.0
   karpenter:
   - apiVersion: v2
     appVersion: 1.0.1
@@ -1352,4 +1363,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-07T23:22:17.849188402Z"
+generated: "2025-04-08T16:58:32.522552097Z"
