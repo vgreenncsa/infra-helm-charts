@@ -1,0 +1,31 @@
+# Default values for k8s-events-watcher.
+
+k8sClusterName: ""
+k8sEnvironment: ""
+eventsApiEndpoint: "genaiapi.dev.ncsav3.tech"
+
+replicaCount: 1
+
+image:
+  repository: siriusminds/k8s-events-watcher
+  pullPolicy: IfNotPresent
+  tag: "0.1.10"
+
+resources: {}
+  # limits:
+  #   cpu: 200m
+  #   memory: 512Mi
+  # requests:
+  #  cpu: 750m
+  #  memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
