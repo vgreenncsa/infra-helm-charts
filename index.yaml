@@ -1115,6 +1115,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/kuberay-operator-0.6.0/kuberay-operator-0.6.0.tgz
     version: 0.6.0
+  metrics-server:
+  - apiVersion: v2
+    appVersion: 0.7.2
+    created: "2025-04-09T12:14:12.843368564Z"
+    description: A Helm chart which deploys metrics-server to kubernetes
+    digest: 20939728046e00e03fbb19033b213068afca44324a791485483bd1e981def0e0
+    name: metrics-server
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/metrics-server-0.1.0/metrics-server-0.1.0.tgz
+    version: 0.1.0
   nvidia-device-plugin:
   - apiVersion: v2
     appVersion: 0.14.1
@@ -1373,4 +1384,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-09T09:59:55.8743414Z"
+generated: "2025-04-09T12:14:12.843452841Z"
