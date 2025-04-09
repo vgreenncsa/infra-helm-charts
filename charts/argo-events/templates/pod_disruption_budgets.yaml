@@ -1,0 +1,29 @@
+{{- if and .Values.podDisruptionBudget (gt (int .Values.replicaCount) 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: controller-manager
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: controller-manager
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: controller-manager
+  {{- toYaml .Values.podDisruptionBudget | nindent 2 }}
+{{- end }}
+---
+{{- if and .Values.podDisruptionBudget (gt (int .Values.replicaCount) 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: events-webhook
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: events-webhook
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: events-webhook
+  {{- toYaml .Values.podDisruptionBudget | nindent 2 }}
+{{- end }}

@@ -3,8 +3,10 @@ kind: Deployment
 metadata:
   name: controller-manager
   namespace: argo-events
+  labels:
+    app.kubernetes.io/name: controller-manager
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: controller-manager
@@ -58,8 +60,10 @@ kind: Deployment
 metadata:
   name: events-webhook
   namespace: argo-events
+  labels:
+    app.kubernetes.io/name: events-webhook
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: events-webhook
