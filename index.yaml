@@ -446,6 +446,16 @@ entries:
   argo-rollouts:
   - apiVersion: v2
     appVersion: 1.31.1
+    created: "2025-04-09T21:43:32.420518111Z"
+    description: Kubernetes Progressive Delivery Controller
+    digest: 07a82098acf77015f2f00901faf2d2e2630153efe9565eb4751f9ce567e58cb6
+    name: argo-rollouts
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-rollouts-0.1.4/argo-rollouts-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.31.1
     created: "2025-04-07T23:22:17.849073436Z"
     description: Kubernetes Progressive Delivery Controller
     digest: d58674e403a8ce5b888b807dc9bedb7d861d1cfbebb72a6bf1a9dc2f8c3274a6
@@ -1434,4 +1444,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-09T21:13:50.741925434Z"
+generated: "2025-04-09T21:43:32.420645851Z"
