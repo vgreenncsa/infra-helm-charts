@@ -722,6 +722,16 @@ entries:
   external-dns:
   - apiVersion: v2
     appVersion: 0.11.0
+    created: "2025-04-09T16:47:18.400225136Z"
+    description: A Helm chart for Kubernetes
+    digest: 92cdc2652315da5dae64ad4e3e2fa29e35fddd7d068488cb1f8bbff2599dc436
+    name: external-dns
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/external-dns-0.1.9/external-dns-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 0.11.0
     created: "2025-04-07T16:57:32.030790792Z"
     description: A Helm chart for Kubernetes
     digest: e5617b7dd5bed82b5253eb1ad902d7229144355961ecd4e50d3a246874c0ab56
@@ -1394,4 +1404,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-09T16:24:28.829575966Z"
+generated: "2025-04-09T16:47:18.400370187Z"
