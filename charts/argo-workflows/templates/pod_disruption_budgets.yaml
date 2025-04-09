@@ -1,0 +1,29 @@
+{{- if and .Values.podDisruptionBudget (gt (int .Values.replicaCount) 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: argo-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: argo-server
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argo-server
+  {{- toYaml .Values.podDisruptionBudget | nindent 2 }}
+{{- end }}
+---
+{{- if and .Values.podDisruptionBudget (gt (int .Values.replicaCount) 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: workflow-controller
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: workflow-controller
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: workflow-controller
+  {{- toYaml .Values.podDisruptionBudget | nindent 2 }}
+{{- end }}
