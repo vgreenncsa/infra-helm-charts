@@ -1,0 +1,14 @@
+{{- if and .Values.podDisruptionBudget (gt (int .Values.operator.replicas) 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: trivy-operator
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: trivy-operator
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: trivy-operator
+  {{- toYaml .Values.podDisruptionBudget | nindent 2 }}
+{{- end }}

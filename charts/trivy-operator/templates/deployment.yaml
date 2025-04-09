@@ -7,6 +7,7 @@ metadata:
   annotations: {{- toYaml . | nindent 4 }}
   {{- end }}
   labels:
+    app.kubernetes.io/name: trivy-operator
     {{- include "trivy-operator.labels" . | nindent 4 }}
     {{- with .Values.operator.labels }}
       {{- toYaml . | nindent 4 }}
