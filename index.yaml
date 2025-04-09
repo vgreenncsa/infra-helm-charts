@@ -487,6 +487,16 @@ entries:
   argo-workflows:
   - apiVersion: v2
     appVersion: 3.4.11
+    created: "2025-04-09T21:13:50.741772379Z"
+    description: The workflow engine for Kubernetes
+    digest: 4c772868f04fe97263644a747b4b36bec314f6964195f35ec40aa359332c62be
+    name: argo-workflows
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-workflows-0.3.3/argo-workflows-0.3.3.tgz
+    version: 0.3.3
+  - apiVersion: v2
+    appVersion: 3.4.11
     created: "2025-04-07T23:13:59.196828688Z"
     description: The workflow engine for Kubernetes
     digest: 2ffe9746abba0ef74961df7aadf06c9d392577986180dda59a2f90590c599bbf
@@ -1424,4 +1434,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-09T20:07:07.656471268Z"
+generated: "2025-04-09T21:13:50.741925434Z"
