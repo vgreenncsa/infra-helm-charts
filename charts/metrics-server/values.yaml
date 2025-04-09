@@ -1,0 +1,11 @@
+# Default values for metrics-server.
+
+replicaCount: 2
+
+image:
+  repository: registry.k8s.io/metrics-server/metrics-server
+  pullPolicy: IfNotPresent
+  tag: "v0.7.2"
+
+nodeSelector: {}
+
