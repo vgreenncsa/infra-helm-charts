@@ -3,7 +3,10 @@ kind: Deployment
 metadata:
   name: argo-server
   namespace: argo
+  labels:
+    app.kubernetes.io/name: argo-server
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: argo-server
@@ -59,7 +62,10 @@ kind: Deployment
 metadata:
   name: workflow-controller
   namespace: argo
+  labels:
+    app.kubernetes.io/name: workflow-controller
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: workflow-controller
