@@ -9,4 +9,4 @@ name: trivy-operator
 sources:
 - https://github.com/aquasecurity/trivy-operator
 type: application
-version: 0.26.1
+version: 0.26.2

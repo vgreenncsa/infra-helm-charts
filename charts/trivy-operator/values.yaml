@@ -50,7 +50,7 @@ operator:
   # -- namespace to install the operator, defaults to the .Release.Namespace
   namespace: ""
   # -- replicas the number of replicas of the operator's pod
-  replicas: 1
+  replicas: 2
 
   # -- number of old history to retain to allow rollback (if not set, default Kubernetes value is set to 10)
   revisionHistoryLimit: ~
@@ -684,6 +684,11 @@ resources: {}
 # requests:
 #   cpu: 100m
 #   memory: 128Mi
+
+# podDisruptionBudget specifies the disruption budget for the controller pods.
+# Disruption budget will be configured only when the replicaCount is greater than 1
+podDisruptionBudget:
+  minAvailable: 1
 
 # -- nodeSelector set the operator nodeSelector
 nodeSelector: {}
