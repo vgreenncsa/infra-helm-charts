@@ -1,0 +1,14 @@
+{{- if and .Values.podDisruptionBudget (gt (int .Values.replicaCount) 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: internal-dns
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: internal-dns
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: internal-dns
+  {{- toYaml .Values.podDisruptionBudget | nindent 2 }}
+{{- end }}
