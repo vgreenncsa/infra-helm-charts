@@ -15,6 +15,13 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-cmd-params-cm
 data:
+  controller.log.level: "error"
+  server.log.level: "error"
+  reposerver.log.level: "error"
+  commitserver.log.level: "error"
+  dexserver.log.level: "error"
+  applicationsetcontroller.log.level: "error"
+  notificationscontroller.log.level: "error"
   server.insecure: "true"
 ---
 apiVersion: v1
