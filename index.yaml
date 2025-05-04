@@ -248,6 +248,17 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/airflow-1.11.0/airflow-1.11.0.tgz
     version: 1.11.0
+  alb-dns:
+  - apiVersion: v2
+    appVersion: 0.11.0
+    created: "2025-05-04T22:20:07.466218305Z"
+    description: A Helm chart for Kubernetes
+    digest: 32fcd9e6baa307b29280742caf56034a6be9cfa77d60c9101d5deef3aaaabb5e
+    name: alb-dns
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/alb-dns-0.1.9/alb-dns-0.1.9.tgz
+    version: 0.1.9
   appmesh-controller:
   - apiVersion: v1
     appVersion: 1.12.7
@@ -1470,4 +1481,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-04-11T16:35:16.650831826Z"
+generated: "2025-05-04T22:20:07.466356663Z"
