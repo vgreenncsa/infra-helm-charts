@@ -1,0 +1,28 @@
+# Default values for external-dns.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: k8s.gcr.io/external-dns/external-dns
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v0.11.0"
+
+provider: "aws"
+
+awsZoneType: "public"
+
+ingressClass: "alb"
+
+awsRegion: "us-east-1"
+
+txtOwnerId: ""
+
+# podDisruptionBudget specifies the disruption budget for the controller pods.
+# Disruption budget will be configured only when the replicaCount is greater than 1
+podDisruptionBudget:
+  minAvailable: 1
+
+nodeSelector: {}
