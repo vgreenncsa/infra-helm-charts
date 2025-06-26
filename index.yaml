@@ -325,6 +325,16 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.5.2
+    created: "2025-06-26T01:01:58.715739937Z"
+    description: A declarative GitOps continuous delivery tool for Kubernetes.
+    digest: 2b533711fe43248398b5a7c6e4c57ea7fbe186e5c6fba2129b77d30aa4439eab
+    name: argo-cd
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/argo-cd-0.1.9/argo-cd-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 2.5.2
     created: "2025-04-11T16:35:16.650681495Z"
     description: A declarative GitOps continuous delivery tool for Kubernetes.
     digest: 3fa92980f99f21cd9270c5369697a5c7041da82e76b08ff73c2ea0a45737a98c
@@ -1481,4 +1491,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-05-04T22:20:07.466356663Z"
+generated: "2025-06-26T01:01:58.715883224Z"
