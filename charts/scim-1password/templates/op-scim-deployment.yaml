@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: op-scim-bridge
+spec:
+  selector:
+    matchLabels:
+      app: op-scim-bridge
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: op-scim-bridge
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      containers:
+        - name: op-scim-bridge
+          image: 1password/scim:v2.9.12
+          securityContext:
+            allowPrivilegeEscalation: false
+          ports:
+            # HTTPS port (external TCP traffic should be forwarded to this when using CertificateManager)
+            - name: https
+              containerPort: 8443
+            # HTTP port (unencrypted traffic can be received using this port)
+            - name: http
+              containerPort: 3002
+          volumeMounts:
+            - name: opuser-data
+              mountPath: /home/opuser/.op
+            - name: secrets
+              mountPath: /secrets
+          resources:
+            requests:
+              cpu: 125m
+              memory: 512M
+            limits:
+              memory: 512M
+          envFrom:
+            - configMapRef:
+                name: op-scim-configmap
+      volumes:
+        - name: opuser-data
+          projected:
+            sources:
+              - secret:
+                  name: scimsession
+              - secret:
+                  name: workspace-credentials
+                  optional: true
+              - secret:
+                  name: workspace-settings
+                  optional: true
+        - name: secrets
+          projected:
+            sources:
+              - secret:
+                  name: op-scim-tls
+                  optional: true
+              - secret:
+                  name: dns01-config
+                  optional: true
