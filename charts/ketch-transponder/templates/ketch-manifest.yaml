@@ -1,0 +1,413 @@
+---
+# Source: transponder/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ketch-transponder-regcred
+  namespace: team-infrastructure
+  labels: 
+    app: ketch-transponder
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6IHsiaHR0cHM6Ly9rZXRjaC5qZnJvZy5pby8iOiB7ImF1dGgiOiAiZEhKaGJuTndiMjVrWlhJdGJtTnpZVHBTYjNabGNpMVRkR1Z5YkdsdVp5MUJkSFJwZEhWa1pTMUNiMkZ6ZEdsdVp6WT0ifX19
+---
+# Source: transponder/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ketch-transponder-confvars
+  namespace: team-infrastructure
+  labels: 
+    app: ketch-transponder
+type: Opaque
+data:
+  tls.cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU5akNDQTk2Z0F3SUJBZ0lTQkJOQ1FoVnBMVlhnd1IwTmRvRi91UUloTUEwR0NTcUdTSWIzRFFFQkN3VUEKTURJeEN6QUpCZ05WQkFZVEFsVlRNUll3RkFZRFZRUUtFdzFNWlhRbmN5QkZibU55ZVhCME1Rc3dDUVlEVlFRRApFd0pTTXpBZUZ3MHlOREF5TWpjeE56STBNekZhRncweU5EQTFNamN4TnpJME16QmFNQ0F4SGpBY0JnTlZCQU1NCkZTb3VjM1JoWjJsdVp5NXVZM05oZGpNdWRHVmphRENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0MKQVFvQ2dnRUJBS3MwLzVuOHBFR0JwblYxOFVUNEtGUURqUTZGMUZRbjNVRCtEcFFOUXBUMy9QZ0V3RE9iUjQ0Mwo1ZTRJZFVJajZqbW5MaitkTHhsVWtnL09tWFR4ZzlucW1Yd1A2bm5DbmR6NHRIODE2SldwWnoySEVxM0c5aHZtClFpbmNYVjVtREU2eWJyN1U1U0lzQUJWYmt4ZUphUSs1TndBeEVpTVViQnV6SzZhZ1R1SFBKbjg0TnhqdHpVSXQKMWFiMlJ1Mi9sRlZkenVnc2tHWnVzWnhNdE9kYnprMDQ2aFBXMjRNSWFwUUkyRFg2T09GbWwzU1oyTXpqUFpHaQpqUEJDMGdZSVBQbWQ5cnBZUEg0eGVrS1lyb1hUYXo2SzJBNGsxMmlPemdESjZ6QXlCN1crdE0rQUJWQTkvenNOCkc0anpCZ0Q3cmI2ZzRiRERCVG5TWlliNUlLT0F4MmtDQXdFQUFhT0NBaFl3Z2dJU01BNEdBMVVkRHdFQi93UUUKQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJdwpBREFkQmdOVkhRNEVGZ1FVNkhWVVowOXRoWWluam1LTkpNUndmMVNudEtRd0h3WURWUjBqQkJnd0ZvQVVGQzZ6CkY3ZFlWc3V1VUFsQTVoK3ZuWXNVd3NZd1ZRWUlLd1lCQlFVSEFRRUVTVEJITUNFR0NDc0dBUVVGQnpBQmhoVm8KZEhSd09pOHZjak11Ynk1c1pXNWpjaTV2Y21jd0lnWUlLd1lCQlFVSE1BS0dGbWgwZEhBNkx5OXlNeTVwTG14bApibU55TG05eVp5OHdJQVlEVlIwUkJCa3dGNElWS2k1emRHRm5hVzVuTG01amMyRjJNeTUwWldOb01CTUdBMVVkCklBUU1NQW93Q0FZR1o0RU1BUUlCTUlJQkF3WUtLd1lCQkFIV2VRSUVBZ1NCOUFTQjhRRHZBSFlBZHYrSVB3cTIKKzVWUndtSE05WWU2TkxTa3pic3AzR2hDQ3AvbVoweGFPblFBQUFHTjY4K3JDUUFBQkFNQVJ6QkZBaUVBbkFXVgpNTkxZaEl6U3E5QmhtdXdoOHpaY3M4SWVqb0R6bnNoNXhiUFZkU1lDSUVVYzg3SEwyQmMzQnJlZ3hvcXhsdEdhCkJkQytFL1d4NnRwdVJmam9USnl3QUhVQW91Sy8xaDdlTHk4SG9OWk9iVGVuM0dWRHNNYTFMcUxhdDRyNG1tMzEKRjlnQUFBR042OCtyRUFBQUJBTUFSakJFQWlBay94WERtd29ibUFVV280MUY5WkFQcnQ4elZBa0k0NlByTkhSWgpSN2tIeXdJZ0MrUUdYeEFRNXEySUpmZ1pXMFRReHAvcjlBQ0M2MWFxMk90UHhzdk13aGd3RFFZSktvWklodmNOCkFRRUxCUUFEZ2dFQkFDSUx4ZDUyVGlqWVFjVzdibkc0bGNZVEx4N1ljRWU5NUFmSXJ5cFN6SGpwMHNNeTRVQzAKT2pzWlRnbUd4Tkg2R1VTVTMvTUJRM3oyakkvSUtveDlrYVVuSkh5SUVWaGZMNE11WXNoeXE0QWpWNGNvblFFQgpuTm9ZU1JZYnF5di9aQ25MVlk2S1NMWE00SmlRbmdxZHZXMnhMcHV4MmdPUGRLOEdiZ1Vjd1ZLWHJvUnRPK1VBCm5mZU1zWTNmK05XalJqMXgxUEw5WkxjV1FrQVM4NXBYZHp1eDhxcC9BRkh5Ykp1RkhGUUtUaW5GMkUraHlFaTQKNkN2MmF5K2E4Y2llRGp0ZXRKTEZPNTVheDRkZmlpNnI0MGFMcG42SXlLUzYwNVd5M1NRYTZCa2I5MGdOUjVHdApBUkRJWFRPbHRYdFFGRzlvUCt6elhVT3FaNUVGbUtKOXZHZz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQotLS0tLUJFR0lOIENFUlRJRklDQVRFLS0tLS0KTUlJRkZqQ0NBdjZnQXdJQkFnSVJBSkVyQ0VyUERCaW5VL2JXTGlXblgxb3dEUVlKS29aSWh2Y05BUUVMQlFBdwpUekVMTUFrR0ExVUVCaE1DVlZNeEtUQW5CZ05WQkFvVElFbHVkR1Z5Ym1WMElGTmxZM1Z5YVhSNUlGSmxjMlZoCmNtTm9JRWR5YjNWd01SVXdFd1lEVlFRREV3eEpVMUpISUZKdmIzUWdXREV3SGhjTk1qQXdPVEEwTURBd01EQXcKV2hjTk1qVXdPVEUxTVRZd01EQXdXakF5TVFzd0NRWURWUVFHRXdKVlV6RVdNQlFHQTFVRUNoTU5UR1YwSjNNZwpSVzVqY25sd2RERUxNQWtHQTFVRUF4TUNVak13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUUM3QWhVb3pQYWdsTk1QRXV5TlZaTEQrSUx4bWFaNlFvaW5YU2FxdFN1NXhVeXhyNDVyK1hYSW85Y1AKUjVRVVZUVlhqSjZvb2prWjlZSThRcWxPYnZVN3d5N2JqY0N3WFBOWk9PZnR6Mm53V2dzYnZzQ1VKQ1dIK2pkeApzeFBuSEt6aG0rL2I1RHRGVWtXV3FjRlR6alRJVXU2MXJ1MlAzbUJ3NHFWVXE3WnREcGVsUURScks5TzhadXRtCk5IejZhNHVQVnltWitEQVhYYnB5Yi91QnhhM1NobGc5RjhmbkNidnhLL2VHM01IYWNWM1VSdVBNclNYQmlMeGcKWjNWbXMvRVk5NkpjNWxQL09vaTJSNlgvRXhqcW1BbDNQNTFUK2M4QjVmV21jQmNVcjJPay81bXprNTNjVTZjRwova2lGSGFGcHJpVjF1eFBNVWdQMTdWR2hpOXNWQWdNQkFBR2pnZ0VJTUlJQkJEQU9CZ05WSFE4QkFmOEVCQU1DCkFZWXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUhBd0lHQ0NzR0FRVUZCd01CTUJJR0ExVWRFd0VCL3dRSU1BWUIKQWY4Q0FRQXdIUVlEVlIwT0JCWUVGQlF1c3hlM1dGYkxybEFKUU9ZZnI1MkxGTUxHTUI4R0ExVWRJd1FZTUJhQQpGSG0wV2VaN3R1WGtBWE9BQ0lqSUdsajI2WnR1TURJR0NDc0dBUVVGQndFQkJDWXdKREFpQmdnckJnRUZCUWN3CkFvWVdhSFIwY0RvdkwzZ3hMbWt1YkdWdVkzSXViM0puTHpBbkJnTlZIUjhFSURBZU1CeWdHcUFZaGhab2RIUncKT2k4dmVERXVZeTVzWlc1amNpNXZjbWN2TUNJR0ExVWRJQVFiTUJrd0NBWUdaNEVNQVFJQk1BMEdDeXNHQVFRQgpndDhUQVFFQk1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQ0Z5azVIUHFQM2hVU0Z2TlZuZUxLWVk2MTFUUjZXClBUTmxjbFF0Z2FEcXcrMzRJTDlmekxkd0FMZHVPL1plbE43a0lKK203NHV5QStlaXRSWThrYzYwN1RrQzUzd2wKaWtmbVpXNC9SdlRaOE02VUsrNVV6aEs4akNkTHVNR1lMNkt2elhHUlNnaTN5TGdqZXdRdENQa0lWejZEMlFRegpDa2NoZUFtQ0o4TXF5SnU1emx6eVpNakF2bm5BVDQ1dFJBeGVrcnN1OTRzUTRlZ2RSQ25iV1NEdFk3a2grQkltCmxKTlhvQjFsQk1FS0lxNFFEVU9Yb1JnZmZ1RGdoamUxV3JHOU1MK0hiaXNxL3lGT0d3WEQ5UmlYOEY2c3c2VzQKYXZBdXZEc3p1ZTVMM3N6ODVLK0VDNFkvd0ZWRE52Wm80VFlYYW82WjBmK2xRS2MwdDhEUVl6azFPWFZ1OHJwMgp5Sk1DNmFsTGJCZk9EQUxadllIN243ZG8xQVpsczRJOWQxUDRqbmtEclFveEIzVXFROWhWbDNMRUtRNzN4RjFPCnlLNUdoRERYOG9WZkdLRjV1K2RlY0lzSDRZYVR3N21QM0dGeEpTcXYzKzBsVUZKb2k1TGM1ZGExNDlwOTBJZHMKaENFeHJvTDErN21yeUlrWFBlRk01VGdPOXIwcnZaYUJGT3ZWMnowZ3AzNVowK0w0V1BsYnVFak4vbHhQRmluKwpIbFVqcjhnUnNJM3FmSk9RRnkvOXJLSUpSMFkvOE9td3QvOG9UV2d5MW1kZUhtbWprN2oxbllzdkM5SlNRNlp2Ck1sZGxUVEtCM3poVGhWMStYV1lwNnJqZDVKVzF6YlZXRWtMTnhFN0dKVGhFVUczc3pnQlZHUDdwU1dUVVRzcVgKbkxSYndIT29xN2hId2c9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBcXpUL21meWtRWUdtZFhYeFJQZ29WQU9ORG9YVVZDZmRRUDRPbEExQ2xQZjgrQVRBCk01dEhqamZsN2doMVFpUHFPYWN1UDUwdkdWU1NEODZaZFBHRDJlcVpmQS9xZWNLZDNQaTBmelhvbGFsblBZY1MKcmNiMkcrWkNLZHhkWG1ZTVRySnV2dFRsSWl3QUZWdVRGNGxwRDdrM0FERVNJeFJzRzdNcnBxQk80YzhtZnpnMwpHTzNOUWkzVnB2Wkc3YitVVlYzTzZDeVFabTZ4bkV5MDUxdk9UVGpxRTliYmd3aHFsQWpZTmZvNDRXYVhkSm5ZCnpPTTlrYUtNOEVMU0JnZzgrWjMydWxnOGZqRjZRcGl1aGROclBvcllEaVRYYUk3T0FNbnJNRElIdGI2MHo0QUYKVUQzL093MGJpUE1HQVB1dHZxRGhzTU1GT2RKbGh2a2dvNERIYVFJREFRQUJBb0lCQUhLODdRTzA5aHZVbU1zbApoTkUxQWtuenEwZnRWclFqbHpza1NIN2VPQjMvNkhBTE53Z2U2NkNiUTZQMzFTWERUZ2pmU3JabFVCaEl2aTZMCnhmcENsWnVvaHI1SEtGdjdtckpwbHdXZUNrYXFwajdzMUE3VVJVSERXZG9XRGhqaWlTTUFvQW1TUWhGWnJhQ2kKbzN4bG9aeGhBMFJFbnFRVjNySGRyTVpacnlQVEIvNjU3bktRUWJKSXVjK0tmRVR5cjBvSmZzTm1VaTQ5SmFDUwo4MXJSL1Y5ZG5BWGJmTlBKY1ljRWFQeHozLzJnaXRQVHI5dGRoSkFvM2x2YzViMFlWOXUxMWdCSUJXU3BXQ2IxCk5MaEN5d2lnUzR3TmNzYmc5dEVoSXhsNzlQU3ZzWDJTQ1NONUg1aU1sRVVxWndmSUtxS0xMc0JIdENhdFRVR3IKVkdwbytwRUNnWUVBdyswaGtkamNSZlk4OWtqYktSQlY3OVBua3JmUUlBWjFaZkE3VFVoaHlxR2ExMzQrbS9GRQpCWmlsd3Y5b1Y3OGVHVzZ0TGs2THAzQnM5M2J6N1pyVnRqcEpUaUhKNW1zYjFxaEZSWFZpc0lmcnp1ZXl1N1dHCnA3UDVDamFqa1BnZ0Y3dlkrWTJFTXhVbk1GWnQ4MlNvVUZtc0xtcEEydHdBL0YyT0dHUWk5VzBDZ1lFQTM3T1QKRUJNbmxxSnVBMVdxRUxsL0x4UGNlZ0NZUno2a3lXMUVTNHUxLzZ6NXhFQWRXT2tuakxDYkdocXN2RGxZRWRGbgp4bEcxd3FPZmJkaXhScnlFcHZxLzdNTGlMV2p4S0ozYkcraGZDYVgyQnZ4WWJ4cjV3UzhrZnNnbGtDZmF3Nkc1CkJIRld2cm9BeGJuNVFRUnJGY0dTK2JrOHBRdXRscHVnZy9CU2FHMENnWUFDZHFETmJLU1lYSmczb0lMZzZVdXIKVUViQkdYNk1hSWhoVjd2bkpOblY2bUpBQTE1V0o1cHJWNWY5ODZna01rcjJsdVdtaDJaS0hLZkNGTVRNWC8zLwo1SXUzWjhWYUdFNnBURVJTc3o4aWFSTVY3dVBZYUZmaEUrbzFycW92MEc3VzNZM0UxWHFzQ2NBTVk0bk9YWjJnCkpRQjlOT2pMMTZoTGhBR2RYT1R6b1FLQmdIbTJzUXVNQUh3N1FIUmNCYjQzejNXRDd2QUtwdEFNeTRnMUJYVzkKUEhjeVhHdGxIeEtqT1R1WlU2cXVYTkhFdWFCb09YaDBPTnNBUDl4NmpHb2FaR3FlQUJNSUxodmEvMnZFQjlWMQpaMUJPbGtCU3lLTWJJRXoySTNzLzF3QktUd01tV1E2THhGRGR6MUhGMEZLSjN1SGxndHlRNXVnK0pHTFBwbFJqClM5TTVBb0dCQUxrWG9DVWZLRnBKVUdMS09iTTdicGFSZTBhTWdVaHJGRG9WVm1lTEhMbFhwdEp0UGZpTXZkU0sKVkdDd05HT0x0WnREUTMvVWNIcHF6Z0NGOUdGVW9TYWNOVGs3Z3VMaGdQRXZhVW9MT3RabUxEdnQ1SjRjQUloZQo5cWJFdDdBZlpFbEhsNWxocVZYRjhBeVBXdlh5VWhjZnB4Um8rcVNnTmVSbk1VWnd6WUV1Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+---
+# Source: transponder/templates/sonar/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ketch-transponder-sonar
+  labels: 
+    app: ketch-transponder
+  annotations:
+    {}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: 5000
+      protocol: TCP
+      name: https
+  selector: 
+    app: ketch-transponder
+    app.kubernetes.io/name: transponder
+    app.kubernetes.io/instance: transponder
+    app.kubernetes.io/component: sonar
+---
+# Source: transponder/templates/transponder/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ketch-transponder-transponder
+  labels: 
+    app: ketch-transponder
+  annotations:
+    {}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: 5000
+      protocol: TCP
+      name: https
+  selector: 
+    app: ketch-transponder
+    app.kubernetes.io/name: transponder
+    app.kubernetes.io/instance: transponder
+    app.kubernetes.io/component: transponder
+---
+# Source: transponder/templates/sonar/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ketch-transponder-sonar
+  labels: 
+    app: ketch-transponder
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: ketch-transponder
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels: 
+        app: ketch-transponder
+    spec:
+      imagePullSecrets:
+        - name: ketch-transponder-regcred
+      containers:
+        - name: sonar
+          image: "ketch.jfrog.io/ketch-docker/transponder/sonar:0.22.19"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SONAR_DEPLOYMENT_TYPE
+              value: "helm"
+            - name: SONAR_DEPLOYMENT_VERSION
+              value: "2.0.6"
+            - name: SONAR_ENVIRONMENT
+              value: "production"
+            - name: SONAR_APPLIANCE_ID
+              value: "imgstaging"
+            - name: SONAR_POLL_INTERVAL
+              value: "60"
+            - name: SONAR_INFERENCE_MODEL_CONFIGURATIONS
+              value: "/app/conf/model_inference_config.json"
+            - name: SONAR_LOGLEVEL
+              value: "info"
+            - name: SONAR_SERVER_MIDDLEWARE_LOGGING_ENABLED
+              value: "true"
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            # Start of Server config
+            - name: SONAR_SERVER_BIND
+              value: "0.0.0.0"
+            - name: SONAR_SERVER_LISTEN
+              value: "5000"
+            - name: SONAR_SERVER_TLS_ENABLED
+              value: "false"
+            - name: SONAR_SERVER_TLS_CERT_FILE
+              value: "/tls/tls.crt"
+            - name: SONAR_SERVER_TLS_KEY_FILE
+              value: "/tls/tls.key"
+            - name: SONAR_SERVER_TLS_INSECURE
+              value: "true"
+            - name: SONAR_SERVER_TLS_OVERRIDE
+              value: "ketch-2025.staging.ncsav3.tech"
+            # End of Server config
+            # Start of Gateway config
+            - name: SONAR_WINDLASS_NAME
+              value: "gateway"
+            - name: SONAR_WINDLASS_URL
+              value: "https://windlass.ketchapi.com"
+            - name: SONAR_WINDLASS_REQUEST_TIMEOUT
+              value: "30"
+            - name: SONAR_WINDLASS_TLS_ENABLED
+              value: "false"
+            - name: SONAR_SECRET_PROVIDER
+              value: "awsSecretsManager"
+            # Start of AWS Secrets Manager config
+            - name: SONAR_AWS_SECRETS_PREFIX
+              value: "ketch"
+            # End of AWS Secrets Manager config
+            - name: TMPDIR
+              value: "/app/tmp/"
+          readinessProbe: 
+            httpGet:
+              path: /healthz
+              port: 5000
+              scheme: HTTP
+              httpHeaders:
+                - name: Host
+                  value: ketch-2025.staging.ncsav3.tech
+            failureThreshold: 3
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe: 
+            httpGet:
+              path: /healthz
+              port: 5000
+              scheme: HTTP
+              httpHeaders:
+                - name: Host
+                  value: ketch-2025.staging.ncsav3.tech
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - name: storage
+              mountPath: /app/tmp
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+          resources: 
+            
+            requests:
+              cpu: "1.0"
+              memory: 256Mi
+            limits:
+              cpu: "2.0"
+              memory: 512Mi
+          securityContext: 
+            
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+      volumes:
+        - name: storage
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ReadWriteOnce]
+                storageClassName: ebs-sc
+                resources:
+                  requests:
+                    storage: 1Gi
+        - name: tls
+          projected:
+            sources:
+              - secret:
+                  name: ketch-transponder-confvars
+                  items:
+                    - key: tls.cert
+                      path: tls.crt
+                    - key: tls.key
+                      path: tls.key
+              
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels: 
+                    app: ketch-transponder
+                topologyKey: topology.kubernetes.io/zone
+      securityContext: 
+        
+        fsGroup: 2000
+      serviceAccountName: team-infrastructure-sa
+---
+# Source: transponder/templates/transponder/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ketch-transponder-transponder
+  labels: 
+    app: ketch-transponder
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: ketch-transponder
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels: 
+        app: ketch-transponder
+    spec:
+      imagePullSecrets:
+        - name: ketch-transponder-regcred
+      containers:
+        - name: ketch-transponder
+          image: "ketch.jfrog.io/ketch-docker/transponder/transponder:0.22.19"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TRANSPONDER_DEPLOYMENT_TYPE
+              value: "helm"
+            - name: TRANSPONDER_DEPLOYMENT_VERSION
+              value: "2.0.6"
+            - name: TRANSPONDER_ENVIRONMENT
+              value: "production"
+            - name: TRANSPONDER_ORG_CODE
+              value: "img_academy"
+            - name: TRANSPONDER_APPLIANCE_ID
+              value: "imgstaging"
+            - name: TRANSPONDER_CONNECTION_TIMEOUT
+              value: "1m"
+            - name: TRANSPONDER_BATCH_ENABLED
+              value: "true"
+            - name: TRANSPONDER_BATCH_SIZE
+              value: "1000"
+            - name: TRANSPONDER_FRONTEND_BASE_URL
+              value: "/transponder"
+            - name: TRANSPONDER_LOGLEVEL
+              value: "info"
+            - name: TRANSPONDER_SERVER_MIDDLEWARE_LOGGING_ENABLED
+              value: "true"
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            - name: GRPC_GO_RETRY
+              value: "on"
+            # Start of Server config
+            - name: TRANSPONDER_SERVER_BIND
+              value: "0.0.0.0"
+            - name: TRANSPONDER_SERVER_LISTEN
+              value: "5000"
+            - name: TRANSPONDER_SERVER_TLS_ENABLED
+              value: "false"
+            - name: TRANSPONDER_SERVER_TLS_CERT_FILE
+              value: "/tls/tls.crt"
+            - name: TRANSPONDER_SERVER_TLS_KEY_FILE
+              value: "/tls/tls.key"
+            - name: TRANSPONDER_SERVER_TLS_INSECURE
+              value: "true"
+            - name: TRANSPONDER_SERVER_TLS_OVERRIDE
+              value: "ketch-2025.staging.ncsav3.tech"
+            # End of Server config
+            # Start of Gateway config
+            - name: TRANSPONDER_WINDLASS_NAME
+              value: "gateway"
+            - name: TRANSPONDER_WINDLASS_URL
+              value: "windlass.ketchapi.com:443"
+            - name: TRANSPONDER_WINDLASS_TLS_ENABLED
+              value: "false"
+            # End of Gateway config
+            - name: TRANSPONDER_SECRET_PROVIDER
+              value: "awsSecretsManager"
+            # Start of AWS Secrets Manager config
+            - name: TRANSPONDER_AWS_SECRETS_PREFIX
+              value: "ketch"
+            # End of AWS Secrets Manager config
+          readinessProbe: 
+            httpGet:
+              path: /healthz
+              port: 5000
+              scheme: HTTP
+              httpHeaders:
+                - name: Host
+                  value: ketch-2025.staging.ncsav3.tech
+            failureThreshold: 3
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe: 
+            httpGet:
+              path: /healthz
+              port: 5000
+              scheme: HTTP
+              httpHeaders:
+                - name: Host
+                  value: ketch-2025.staging.ncsav3.tech
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+          resources: 
+            
+            requests:
+              cpu: "1.0"
+              memory: 256Mi
+            limits:
+              cpu: "2.0"
+              memory: 512Mi
+          securityContext: 
+            
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+      volumes:
+        - name: tls
+          projected:
+            sources:
+              - secret:
+                  name: ketch-transponder-confvars
+                  items:
+                    - key: tls.cert
+                      path: tls.crt
+                    - key: tls.key
+                      path: tls.key
+              
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels: 
+                    app: ketch-transponder
+                topologyKey: topology.kubernetes.io/zone
+      securityContext: 
+        
+        fsGroup: 2000
+      serviceAccountName: team-infrastructure-sa
+---
+# Source: transponder/templates/public-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ketch-transponder-staging-ingress
+  labels:
+    app.kubernetes.io/version: "2.0.6"
+    app.kubernetes.io/environment: staging
+  annotations:
+    kubernetes.io/ingress.class: nginx-public
+spec:
+  rules:
+    - host: "ketch-2025.staging.ncsav3.tech"
+      http:
+        paths:
+          - path: /transponder
+            pathType: Prefix
+            backend:
+              service:
+                name: ketch-transponder-transponder
+                port:
+                  number: 443
+
