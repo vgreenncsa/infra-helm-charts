@@ -7,5 +7,5 @@ keywords:
 maintainers:
 - email: support@ketch.com
   name: Ketch Support
-name: transponder
+name: ketch-transponder
 version: 2.0.6
