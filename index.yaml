@@ -1095,6 +1095,22 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/karpenter-0.31.0/karpenter-0.31.0.tgz
     version: 0.31.0
+  ketch-transponder:
+  - apiVersion: v2
+    appVersion: 0.22.19
+    created: "2025-07-03T14:17:25.398862567Z"
+    description: Ketch Transponder
+    digest: f63ab9fd14eb7637d475fe2dcb5544b6ec002caf900032e8db6b0b6072cc6ce4
+    keywords:
+    - ketch
+    - transponder
+    maintainers:
+    - email: support@ketch.com
+      name: Ketch Support
+    name: ketch-transponder
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/ketch-transponder-2.0.6/ketch-transponder-2.0.6.tgz
+    version: 2.0.6
   kube-prometheus-stack:
   - annotations:
       artifacthub.io/license: Apache-2.0
@@ -1491,4 +1507,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-06-26T01:01:58.715883224Z"
+generated: "2025-07-03T14:17:25.399018068Z"
