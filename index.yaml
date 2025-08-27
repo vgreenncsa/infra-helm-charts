@@ -1368,6 +1368,16 @@ entries:
   scim-1password:
   - apiVersion: v2
     appVersion: 2.9.12
+    created: "2025-08-27T12:47:39.810787737Z"
+    description: A Helm chart for 1password SCIM
+    digest: d39e5635cdd891b418d46ffe066b5c9163c26c25ffb6a039e9be98d2d68d8adf
+    name: scim-1password
+    type: application
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/scim-1password-0.1.1/scim-1password-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2.9.12
     created: "2025-07-03T17:12:36.919051226Z"
     description: A Helm chart for 1password SCIM
     digest: 5729f1d5bb72d4ddb3f3449ca5cca821cb39531d6540f3625c0579c9c1798214
@@ -1518,4 +1528,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-07-03T17:12:36.919249497Z"
+generated: "2025-08-27T12:47:39.810921579Z"
