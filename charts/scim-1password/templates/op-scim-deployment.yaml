@@ -64,3 +64,5 @@ spec:
               - secret:
                   name: dns01-config
                   optional: true
+      nodeSelector:
+        intent: team-infrastructure
