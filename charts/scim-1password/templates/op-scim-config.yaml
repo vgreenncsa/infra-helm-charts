@@ -11,13 +11,13 @@ data:
   # op-scim-bridge container, set OP_TLS_DOMAIN to the fully qualified domain name of a public DNS record that points
   # to the external IP address of the op-scim-bridge Service. If not set, CertificateManager is disabled; the SCIM
   # bridge container can receive cluster-internal, plain-text HTTP traffic on the http port.
-  OP_TLS_DOMAIN: ""
+  OP_TLS_DOMAIN: {{ .Values.opTLSDomain }}
 
   # To connect SCIM bridge to an external Redis server, set OP_REDIS_URL to its Redis connection URI. Leave this set to
   # redis://op-scim-redis:6379 to connect to the op-scim-redis Service included with this deployment example. If this
   # value is no set, SCIM bridge will use the default value of redis://localhost:6379. If SCIM bridge is unable to
   # connect to Redis, it will fail to load. See below for additional Redis configuration options.
-  OP_REDIS_URL: "redis://op-scim-redis:6379"
+  OP_REDIS_URL: {{ .Values.opRedisURL }}
 
   # ADVANCED REDIS OPTIONS
   # If you are connecting SCIM bridge to an external Redis server, you can use the following environment variables in
