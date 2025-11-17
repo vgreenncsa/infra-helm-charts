@@ -5,7 +5,7 @@ global:
   image:
     # -- What tagged version of the docker image you want deployed
     # @default -- Defaults to AppVersion in Chart.yaml
-    tag: ''
+    tag: ""
     # -- What docker image pull policy do you want?
     pullPolicy: IfNotPresent
   # -- Any additional imagePullSecrets to be used
@@ -29,19 +29,36 @@ global:
     # -- Annotations to be added to the service account
     annotations: {}
 
+# -- Labels to be added to all deployed resources
+commonLabels: {}
+# -- Annotations to be added to all deployed resources
+commonAnnotations: {}
+# -- Extra environment variables to be added to all deployments
+extraEnvVars: []
+# -- Extra volumes to be added to all deployments
+extraVolumes: []
+# -- Extra volume mounts to be added to all deployments
+extraVolumeMounts: []
+
 config:
-  # -- [Required] Which org is Transponder for.  You will receive this Org from Ketch Support <support@ketch.com>
-  org: ''
+  # -- [DEPRECATED] Organization code is no longer in use. This field will be removed in the next major version.
+  org: ""
   # -- [Required] What is the ID of Transponder.  This is to identify the transponder.
   #    This commonly reflects the location or environment that the transponder is deployed into.
   #    Only lower case alphabet, numbers, and `_` are valid characters for this ID.
-  id: ''
+  id: ""
 
   transponder:
     # -- Resource limits and requests
-    resources: {}
+    resources:
+      requests:
+        cpu: "1"
+        memory: 1Gi
+      limits:
+        cpu: "2"
+        memory: 2Gi
     # -- How many Transponder pods to run
-    replica: 12
+    replica: 2
     service:
       # -- Annotations to be added to the service
       annotations: {}
@@ -55,9 +72,19 @@ config:
     serviceAccount:
       # -- The name of the service account to use
       # @default -- A generated name using the fullname template
-      name: ''
+      name: ""
       # -- Annotations to be added to the service account
       annotations: {}
+    # -- Extra labels to be added to the Transponder pods
+    podLabels: {}
+    # -- Extra annotations to be added to the Transponder pods
+    podAnnotations: {}
+    # -- Extra environment variables to be added to the Transponder deployment
+    extraEnvVars: []
+    # -- Extra volumes to be added to the Transponder deployment
+    extraVolumes: []
+    # -- Extra volume mounts to be added to the Transponder deployment
+    extraVolumeMounts: []
 
   sonar:
     # -- Specifies whether the agent component should be used
@@ -68,9 +95,15 @@ config:
       # -- Which storage class should be used? If left empty, the default storage class will be used.
       class: ""
     # -- Resource limits and requests
-    resources: {}
+    resources:
+      requests:
+        cpu: "1"
+        memory: 1Gi
+      limits:
+        cpu: "2"
+        memory: 2Gi
     # -- How many Sonar pods to run
-    replica: 1
+    replica: 2
     service:
       # -- Annotations to be added to the service
       annotations: {}
@@ -84,37 +117,19 @@ config:
     serviceAccount:
       # -- The name of the service account to use
       # @default -- A generated name using the fullname template
-      name: ''
+      name: ""
       # -- Annotations to be added to the service account
       annotations: {}
-
-  agent:
-    # -- Specifies whether the agent component should be used
-    enabled: false
-    # -- Number of milliseconds between checking for new work
-    interval: 60000
-    # -- List of scripts to use
-    scripts: []
-    # -- Resource limits and requests
-    resources: {}
-    # -- How many Agent pods to run
-    replica: 3
-    service:
-      # -- Annotations to be added to the service
-      annotations: {}
-      # -- Type of the service
-      # The default value will change to `ClusterIP` in the next major version
-      type: NodePort
-      # -- Port that this service exposes
-      port: 443
-      # -- Addresses that are allowed when service is LoadBalancer
-      loadBalancerSourceRanges: []
-    serviceAccount:
-      # -- The name of the service account to use
-      # @default -- A generated name using the fullname template
-      name: ''
-      # -- Annotations to be added to the service account
-      annotations: {}
+    # -- Extra labels to be added to the Sonar pods
+    podLabels: {}
+    # -- Extra annotations to be added to the Sonar pods
+    podAnnotations: {}
+    # -- Extra environment variables to be added to the Sonar deployment
+    extraEnvVars: []
+    # -- Extra volumes to be added to the Sonar deployment
+    extraVolumes: []
+    # -- Extra volume mounts to be added to the Sonar deployment
+    extraVolumeMounts: []
 
   # The tls section below is for the transponder mTLS communications between pods.  You can use your own CA certificate,
   # or create a self-signed one.  To create a self-signed certificate, you can use the following as an example:
@@ -129,16 +144,16 @@ config:
   #
   tls:
     # -- Override the TLS server name. This should match your TLS certificate
-    override: 'transponder'
+    override: "transponder"
     cert:
       # -- The base64 encoded TLS certificate.
-      content: ''
+      content: ""
     key:
       # -- The base64 encoded TLS key.
-      content: ''
+      content: ""
     rootca:
       # -- The base64 encoded TLS root CA.
-      content: ''
+      content: ""
 
   vault:
     # -- [DEPRECATED] Use .secret.provider instead. This field will be removed in the next major version.
@@ -175,41 +190,55 @@ config:
     # -- AWS Region.  Used for populating the AWS_DEFAULT_REGION environment variable
     region: "us-west-2"
     # -- AWS access key.  Used for AWS Secrets Manager
-    keyId: ''
+    keyId: ""
     # -- AWS secret access key.  Used for AWS Secrets Manager
-    secretKey: ''
+    secretKey: ""
     secretsManager:
       # -- [DEPRECATED] Use .secret.provider instead. This field will be removed in the next major version.
       enabled: true
-      # -- Prefix for secret names
+      # -- Prefix to use; all secrets will be created under this prefix
       prefix: ketch
 
   azure:
     # -- Vault URI of the Key Vault
-    vaultURI: ''
+    vaultURI: ""
     # -- Prefix to use; all secrets will be created under this prefix
     prefix: ketch
     # -- Directory/Tenant ID of the app registration
-    tenantID: ''
+    tenantID: ""
     client:
       # -- Application/Client ID of the app registration
-      id: ''
+      id: ""
       # -- Application/Client secret of the app registration
-      secret: ''
+      secret: ""
+
+  googleSecretsManager:
+    # -- Google Secrets Manager project ID
+    projectID: ""
+    # -- Prefix to use; all secrets will be created under this prefix
+    prefix: ketch
+    # -- Kubernetes secret to use for the service account credentials for Google Cloud Platform
+    secret:
+      # -- Name of the Kubernetes secret in which the service account credentials are stored
+      name: ""
+      # -- Key of the Kubernetes secret in which the service account credentials are stored
+      key: ""
+    # -- JSON key of the service account for Google Cloud Platform
+    key: ""
 
 secret:
-  # -- Which secret providers to use (either 'awsSecretsManager', 'vault', or 'azureKeyVault')
-  provider: ''
+  # -- Which secret providers to use (either 'awsSecretsManager', 'vault', 'azureKeyVault', or 'googleSecretsManager')
+  provider: ""
 
 ingress:
   # -- Enable ingress
   enabled: true
   # -- Name of the host under this ingress
-  hostname: 'transponder'
+  hostname: "transponder"
   # -- Annotations to apply to the ingress
   annotations: {}
   # -- Ingress Class to be used
-  class: ''
+  class: ""
   # -- Enable TLS configuration for the hostname defined at `ingress.hostname` parameter
   tls: true
   # -- The additional tls configurations to be covered with this ingress record.
@@ -232,11 +261,11 @@ imageCredentials:
   # -- Enable imagePullSecret
   enabled: true
   # -- What Docker registry is your docker container located at?
-  registry: 'https://ketch.jfrog.io/'
-  # -- Username to use for image registry
-  username: ''
-  # -- Password to use for image registry
-  password: ''
+  registry: "https://ketch.jfrog.io/"
+  # -- Username to use for image registry. This is found at the Create Transponder page, under the Ketch repository User Name.
+  username: ""
+  # -- Password to use for image registry. This is found at the Create Transponder page, under the Ketch repository Key.
+  password: ""
 
 metrics:
   serviceMonitor:

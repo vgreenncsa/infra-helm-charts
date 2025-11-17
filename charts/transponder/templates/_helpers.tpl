@@ -55,6 +55,9 @@ Common labels
 helm.sh/chart: {{ include "ketch.transponder.chart" . }}
 app.kubernetes.io/version: {{ include "ketch.transponder.version" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Values.commonLabels }}
+{{ toYaml .Values.commonLabels }}
+{{- end }}
 {{- end -}}
 
 {{/*
@@ -64,6 +67,15 @@ Common selector/matching labels
 app: {{ include "ketch.transponder.name" . }}
 app.kubernetes.io/name: {{ include "ketch.transponder.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Common annotations
+*/}}
+{{- define "ketch.transponder.annotations" -}}
+{{- if .Values.commonAnnotations }}
+{{ toYaml .Values.commonAnnotations }}
+{{- end }}
 {{- end -}}
 
 {{/*
@@ -87,6 +99,7 @@ rollingUpdate:
 {{- $aws := .context.Values.config.aws -}}
 {{- $vault := .context.Values.config.vault -}}
 {{- $azure := .context.Values.config.azure -}}
+{{- $googleSecretsManager := .context.Values.config.googleSecretsManager -}}
 {{- $component := .component | upper -}}
 {{- $provider := (.context.Values.secret.provider | default (ternary "vault" "awsSecretsManager" .context.Values.config.vault.enabled)) -}}
 - name: {{ $component }}_SECRET_PROVIDER
@@ -160,6 +173,27 @@ rollingUpdate:
       key: azure_client_secret
 # End of Azure Key Vault config
 {{- end }}
+{{- if eq $provider "googleSecretsManager" }}
+# Start of Google Secrets Manager config
+- name: {{ $component }}_GOOGLE_SECRETS_PROJECT_ID
+  value: "{{ $googleSecretsManager.projectID }}"
+- name: {{ $component }}_GOOGLE_SECRETS_PREFIX
+  value: "{{ $googleSecretsManager.prefix }}"
+{{- if and $googleSecretsManager.secret.name $googleSecretsManager.secret.key }}
+- name: {{ $component }}_GOOGLE_SECRETS_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ $googleSecretsManager.secret.name }}
+      key: {{ $googleSecretsManager.secret.key }}
+{{- else }}
+- name: {{ $component }}_GOOGLE_SECRETS_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ include "ketch.transponder.fullname" .context }}-confvars
+      key: google_secrets_key
+{{- end }}
+# End of Google Secrets Manager config
+{{- end }}
 {{- end -}}
 
 {{- define "ketch.transponder.deployment.probe" -}}
@@ -169,7 +203,7 @@ rollingUpdate:
 httpGet:
   path: /healthz
   port: {{ $port | default "5000" }}
-  scheme: HTTP
+  scheme: HTTPS
   httpHeaders:
     - name: Host
       value: {{ $tls_host | default "transponder" }}
@@ -192,20 +226,8 @@ httpGet:
 {{ include "ketch.transponder.deployment.probe" (mustMerge (dict "probe" $probe) .) }}
 {{- end -}}
 
-{{- define "ketch.transponder.deployment.resources" -}}
-{{- with . }}
-{{- toYaml . }}
-{{- else }}
-requests:
-  cpu: "1.0"
-  memory: 256Mi
-limits:
-  cpu: "2.0"
-  memory: 512Mi
-{{- end }}
-{{- end -}}
-
-{{- define "ketch.transpodner.deployment.volume.server.tls" -}}
+{{- define "ketch.transponder.deployment.volume.server.tls" -}}
+{{- if .Values.config.tls.cert.content }}
 - secret:
     name: {{ include "ketch.transponder.fullname" . }}-confvars
     items:
@@ -216,6 +238,7 @@ limits:
 {{- if .Values.config.tls.rootca.content }}
       - key: ca.crt
         path: {{ include "ketch.transponder.tls.rootca.file" .Values.config }}
+{{- end }}
 {{- end }}
 {{- end -}}
 

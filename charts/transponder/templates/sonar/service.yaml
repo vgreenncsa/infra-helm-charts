@@ -4,13 +4,19 @@ kind: Service
 metadata:
   name: {{ include "ketch.transponder.sonar.fullname" . }}
   labels: {{ include "ketch.transponder.sonar.labels" . | nindent 4 }}
+  {{- /*
+  Any annotations added to this specific service takes precedence. But also use the ones added to the global value.
+  Utilize mergeOverwrite to combine the two dictionaries.
+  */ -}}
+  {{- $annotations := mergeOverwrite
+    (deepCopy .Values.global.service.annotations)
+    (.Values.config.sonar.service.annotations)
+    (fromYaml (include "ketch.transponder.sonar.annotations" .))
+  -}}
+  {{- if $annotations }}
   annotations:
-{{/*
-Any annotations added to this specific service takes precedence. But also use the ones added to the global value.
-Utilize mergeOverwrite to combine the two dictionaries.
-*/}}
-{{- $annotations := mergeOverwrite (deepCopy .Values.global.service.annotations) (.Values.config.sonar.service.annotations) -}}
-{{- toYaml $annotations | indent 4 }}
+    {{- toYaml $annotations | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ (.Values.config.sonar.service).type }}
   {{- if and (eq .Values.config.sonar.service.type "LoadBalancer") .Values.config.sonar.service.loadBalancerSourceRanges }}

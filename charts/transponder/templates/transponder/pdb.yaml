@@ -9,6 +9,7 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ include "ketch.transponder.transponder.fullname" . }}
   labels: {{ include "ketch.transponder.transponder.labels" . | nindent 4 }}
+  annotations: {{ include "ketch.transponder.transponder.annotations" . | nindent 4 }}
 spec:
   selector:
     matchLabels: {{ include "ketch.transponder.transponder.matchLabels" . | nindent 6 }}
