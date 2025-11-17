@@ -6,10 +6,10 @@ kind: Ingress
 metadata:
   name: transponder-{{ $ingEnvironment }}-ingress
   labels:
-    helm.sh/chart: transponder-2.0.6
+    helm.sh/chart: transponder-2.4.2
     app.kubernetes.io/name: transponder
     app.kubernetes.io/instance: ketch.transponder
-    app.kubernetes.io/version: "2.0.6"
+    app.kubernetes.io/version: "0.23.16"
     app.kubernetes.io/environment: {{ $ingEnvironment }}
   annotations:
     kubernetes.io/ingress.class: {{ $ingClass }}

@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: {{ include "ketch.transponder.transponder.fullname" . }}
   labels: {{ include "ketch.transponder.transponder.labels" . | nindent 4 }}
+  annotations: {{ include "ketch.transponder.transponder.annotations" . | nindent 4 }}
 spec:
   replicas: {{ .Values.config.transponder.replica }}
   selector:
@@ -12,6 +13,13 @@ spec:
   template:
     metadata:
       labels: {{ include "ketch.transponder.transponder.labels" . | nindent 8 }}
+        {{- if .Values.config.transponder.podLabels }}
+        {{- toYaml .Values.config.transponder.podLabels | nindent 8 }}
+        {{- end }}
+      annotations: {{ include "ketch.transponder.transponder.annotations" . | nindent 8 }}
+        {{- if .Values.config.transponder.podAnnotations }}
+        {{- toYaml .Values.config.transponder.podAnnotations | nindent 8 }}
+        {{- end }}
     spec:
       imagePullSecrets:
 {{- if .Values.imageCredentials.enabled }}
@@ -31,8 +39,6 @@ spec:
               value: "{{ .Chart.Version }}"
             - name: TRANSPONDER_ENVIRONMENT
               value: "{{ .Values.config.environment | default "production" }}"
-            - name: TRANSPONDER_ORG_CODE
-              value: "{{ .Values.config.org }}"
             - name: TRANSPONDER_APPLIANCE_ID
               value: "{{ .Values.config.id }}"
             - name: TRANSPONDER_CONNECTION_TIMEOUT
@@ -73,13 +79,13 @@ spec:
             - name: TRANSPONDER_SERVER_LISTEN
               value: "{{ .Values.config.transponder.listen | default "5000" }}"
             - name: TRANSPONDER_SERVER_TLS_ENABLED
-              value: "false"
+              value: "true"
             - name: TRANSPONDER_SERVER_TLS_CERT_FILE
               value: "/tls/{{ include "ketch.transponder.tls.cert.file" .Values.config }}"
             - name: TRANSPONDER_SERVER_TLS_KEY_FILE
               value: "/tls/{{ include "ketch.transponder.tls.key.file" .Values.config }}"
             - name: TRANSPONDER_SERVER_TLS_INSECURE
-              value: "{{ .Values.config.tls.insecure | default "true" }}"
+              value: "{{ .Values.config.tls.insecure | default "false" }}"
             - name: TRANSPONDER_SERVER_TLS_OVERRIDE
               value: "{{ .Values.config.tls.override }}"
 {{- if .Values.config.tls.rootca.content }}
@@ -93,10 +99,10 @@ spec:
             - name: TRANSPONDER_WINDLASS_URL
               value: "{{ (.Values.config.transponder.gateway).url | default "windlass.ketchapi.com:443" }}"
             - name: TRANSPONDER_WINDLASS_TLS_ENABLED
-              value: "false"
+              value: "true"
 {{- with (.Values.config.transponder.gateway).tls }}
             - name: TRANSPONDER_WINDLASS_TLS_INSECURE
-              value: "{{ .insecure | default "true" }}"
+              value: "{{ .insecure | default "false" }}"
 {{- if .override }}
             - name: TRANSPONDER_WINDLASS_TLS_OVERRIDE
               value: "{{ .override }}"
@@ -113,21 +119,40 @@ spec:
 {{- end }}
 {{- end }}
             # End of Gateway config
+            {{- $envvar := concat .Values.extraEnvVars .Values.config.transponder.extraEnvVars -}}
+            {{- if $envvar }}
+            # Extra environment variable(s)
+            {{ toYaml $envvar | nindent 12 }}
+            {{- end }}
 {{- include "ketch.transponder.deployment.env.secretProvider" (dict "context" . "component" "TRANSPONDER") | nindent 12 }}
           readinessProbe: {{ include "ketch.transponder.deployment.readinessProbe" (dict "context" . "component" "transponder") | nindent 12 }}
           livenessProbe: {{ include "ketch.transponder.deployment.livenessProbe" (dict "context" . "component" "transponder") | nindent 12 }}
           volumeMounts:
+            {{- if or .Values.config.tls.cert.content ((.Values.config.vault.tls).cert).content }}
             - name: tls
               mountPath: /tls
               readOnly: true
-          resources: {{ include "ketch.transponder.deployment.resources" .Values.config.transponder.resources | nindent 12 }}
+            {{- end }}
+            {{- $volumeMounts := concat .Values.extraVolumeMounts .Values.config.transponder.extraVolumeMounts -}}
+            {{- if $volumeMounts }}
+            # Extra volume mount(s)
+            {{ toYaml $volumeMounts | nindent 12 }}
+            {{- end }}
+          resources: {{ toYaml .Values.config.transponder.resources | nindent 12 }}
           securityContext: {{ include "ketch.transponder.deployment.securityContext" .Values.securityContext | nindent 12 }}
       volumes:
+{{- if or .Values.config.tls.cert.content ((.Values.config.vault.tls).cert).content }}
         - name: tls
           projected:
             sources:
-{{- include "ketch.transpodner.deployment.volume.server.tls" . | nindent 14 -}}
+{{- include "ketch.transponder.deployment.volume.server.tls" . | nindent 14 -}}
 {{- include "ketch.transponder.deployment.volume.vault.tls" . | nindent 14 -}}
+{{- end }}
+        {{- $volumes := concat .Values.extraVolumes .Values.config.transponder.extraVolumes -}}
+        {{- if $volumes }}
+        # Extra volume(s)
+        {{- toYaml $volumes | nindent 8 }}
+        {{- end }}
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{- toYaml . | nindent 8 }}

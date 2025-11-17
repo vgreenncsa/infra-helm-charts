@@ -12,6 +12,10 @@ app.kubernetes.io/component: transponder
 app.kubernetes.io/component: transponder
 {{- end -}}
 
+{{- define "ketch.transponder.transponder.annotations" -}}
+{{ include "ketch.transponder.annotations" . }}
+{{- end -}}
+
 {{- define "ketch.transponder.transponder.serviceAccountName" -}}
 {{- .Values.config.transponder.serviceAccount.name | default .Values.serviceAccount.name | default (printf "%s-transponder" (include "ketch.transponder.fullname" .)) -}}
 {{- end -}}

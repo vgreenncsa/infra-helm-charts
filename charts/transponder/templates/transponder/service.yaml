@@ -3,13 +3,19 @@ kind: Service
 metadata:
   name: {{ include "ketch.transponder.transponder.fullname" . }}
   labels: {{ include "ketch.transponder.transponder.labels" . | nindent 4 }}
+  {{- /*
+  Any annotations added to this specific service takes precedence. But also use the ones added to the global value.
+  Utilize mergeOverwrite to combine the two dictionaries.
+  */ -}}
+  {{- $annotations := mergeOverwrite
+    (deepCopy .Values.global.service.annotations)
+    (.Values.config.transponder.service.annotations)
+    (fromYaml (include "ketch.transponder.transponder.annotations" .))
+  -}}
+  {{- if $annotations }}
   annotations:
-{{/*
-Any annotations added to this specific service takes precedence. But also use the ones added to the global value.
-Utilize mergeOverwrite to combine the two dictionaries.
-*/}}
-{{- $annotations := mergeOverwrite (deepCopy .Values.global.service.annotations) (.Values.config.transponder.service.annotations) -}}
-{{- toYaml $annotations | indent 4 }}
+    {{- toYaml $annotations | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ (.Values.config.transponder.service).type }}
   {{- if and (eq .Values.config.transponder.service.type "LoadBalancer") .Values.config.transponder.service.loadBalancerSourceRanges }}

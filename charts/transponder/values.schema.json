@@ -42,7 +42,6 @@
     "config": {
       "type": "object",
       "required": [
-        "org",
         "id",
         "sonar",
         "tls",
@@ -50,10 +49,6 @@
         "aws"
       ],
       "properties": {
-        "org": {
-          "type": "string",
-          "pattern": "^.+$"
-        },
         "id": {
           "type": "string",
           "pattern": "^[a-z\\d_]+$"

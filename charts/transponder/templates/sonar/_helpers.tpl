@@ -12,6 +12,10 @@ app.kubernetes.io/component: sonar
 app.kubernetes.io/component: sonar
 {{- end -}}
 
+{{- define "ketch.transponder.sonar.annotations" -}}
+{{ include "ketch.transponder.annotations" . }}
+{{- end -}}
+
 {{- define "ketch.transponder.sonar.serviceAccountName" -}}
 {{- .Values.config.sonar.serviceAccount.name | default .Values.serviceAccount.name | default (printf "%s-sonar" (include "ketch.transponder.fullname" .)) -}}
 {{- end -}}
