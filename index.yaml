@@ -1420,6 +1420,21 @@ entries:
     version: 0.44.0
   transponder:
   - apiVersion: v2
+    appVersion: 0.23.16
+    created: "2025-11-17T18:11:05.102568236Z"
+    description: Ketch Transponder
+    digest: c417e61ff14188ebaefcddba57490a6508ad33fe74064c01d589fe676813194f
+    keywords:
+    - ketch
+    - transponder
+    maintainers:
+    - email: support@ketch.com
+      name: Ketch Support
+    name: transponder
+    urls:
+    - https://github.com/vgreenncsa/infra-helm-charts/releases/download/transponder-2.4.2/transponder-2.4.2.tgz
+    version: 2.4.2
+  - apiVersion: v2
     appVersion: 0.22.19
     created: "2024-04-23T16:48:48.121111343Z"
     description: Ketch Transponder
@@ -1528,4 +1543,4 @@ entries:
     urls:
     - https://github.com/vgreenncsa/infra-helm-charts/releases/download/trivy-operator-0.24.1/trivy-operator-0.24.1.tgz
     version: 0.24.1
-generated: "2025-08-27T12:47:39.810921579Z"
+generated: "2025-11-17T18:11:05.102717089Z"
